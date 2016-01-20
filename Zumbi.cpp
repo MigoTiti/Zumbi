@@ -15,7 +15,7 @@ void Zumbi::setName(string name){
 
 void Zumbi::setHealth(float x){
 	if (x>=0)
-	HP=x;
+	hp=x;
 }
 
 void Zumbi::setSpeed(int s){
@@ -24,7 +24,7 @@ void Zumbi::setSpeed(int s){
 }
 
 float Zumbi::getHealth(){
-	return HP;
+	return hp;
 }
 
 string Zumbi::getName(){

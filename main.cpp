@@ -3,7 +3,7 @@
 #include <windows.h>
 #include <random>
 #include <ctime>
-#include "Zumbi.h "
+#include "Zumbi.h"
 
 #define tam 30
 #define humans 8
