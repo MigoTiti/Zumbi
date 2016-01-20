@@ -36,7 +36,9 @@ int Zumbi::getSpeed(){
 }
 
 void Zumbi::pegarItem(string item){
-	
+	switch(item){
+		case ''
+	}
 }
 
 int Zumbi::atacarHumano(){
