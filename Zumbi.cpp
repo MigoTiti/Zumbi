@@ -35,6 +35,10 @@ int Zumbi::getSpeed(){
 	return velocidade;
 }
 
+void Zumbi::pegarItem(string item){
+	
+}
+
 int Zumbi::atacarHumano(){
 	int VidaH=vh, Sh=200, Sz=300, opt, maismenos, atk, total;
 	float hp;

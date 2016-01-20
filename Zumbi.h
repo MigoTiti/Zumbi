@@ -6,7 +6,7 @@ class Zumbi {
 	private:
 		string nome;
 		int velocidade;
-		float HP;
+		float hp;
 	public:
 		Zumbi(string);
 		void setName(string);
@@ -16,4 +16,5 @@ class Zumbi {
 		int getSpeed();
 		float getHealth();
 		int atacarHumano();
+		void pegarItem(string);
 };
