@@ -3,7 +3,7 @@
 #include <windows.h>
 #include <random>
 #include <ctime>
-#include "Zumbi.h"
+#include "Zumbi.h "
 
 #define tam 30
 #define humans 8
@@ -75,12 +75,12 @@ int atacarHumano(Zumbi z1){
 				maismenos=rand() % 2;
 				atk=rand() % 201;
 				if (maismenos==1){
-					VidaH=VidaH-(Sz+atk)-100;
+					VidaH=VidaH-(Sz+atk+100);
 					if (hp<0){
 						hp=0;
 					}
 				}else{
-					VidaH=VidaH-(Sz-atk)-100;
+					VidaH=VidaH-(Sz-atk+100);
 					if (hp<0){
 						hp=0;
 					}
@@ -392,4 +392,3 @@ int menu(void){
 	cin >> op;
 	return op;
 }
-

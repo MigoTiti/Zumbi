@@ -1,6 +1,5 @@
 #include "Zumbi.h"
-
-
+ 
 Zumbi::Zumbi(string name){
 	nome=name;
 }
