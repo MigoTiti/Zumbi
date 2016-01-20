@@ -3,13 +3,12 @@
 #include <windows.h>
 #include <random>
 #include <ctime>
-#include "ClasseZumbi.cpp"
+#include "Zumbi.h"
 
 #define tam 30
 #define humans 8
 
 using namespace std;
-
 
 void escolha2(int opt);
 void escolha(int op, Zumbi z1, char mapa[tam][tam]);
@@ -19,44 +18,79 @@ void exibirMapa(char mapa[tam][tam]);
 void andarMapa(char mapa[tam][tam], char d);
 void verificarMapa(char mapa[tam][tam], char d, int x, int y, int *l, int *c);
 void procurarMapa(char mapa[tam][tam], int *l, int *c);
+int atacarHumano(Zumbi z1);
 
 HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE);
 
-void escolha(int op, Zumbi z1, char mapa[tam][tam]){
-	int opt, i, j;
-	char d;
-	switch(op){
-		case 1:
-			system("cls");
-			cout << "Nome: " << z1.getName();
-			cout << "\nPontos de vida: " << z1.getHealth();
-			cout << "\nVelocidade: " << z1.getSpeed() << "\n";
-			cout << "\nDeseja voltar ao menu? (s=1/n=0): ";
-			cin >> opt;
-			escolha2(opt);
-			break;
-		case 2:
-			system("cls");
-			exibirMapa(mapa);
-			cout << "\nDeseja voltar ao menu? (s=1/n=0): ";
-			cin >> opt;
-			escolha2(opt);
-			break;
-		case 3:
-			system("cls");
-			exibirMapa(mapa);
-			cout << "\nUse o numpad para andar: ";
-			d=getche();
-			andarMapa(mapa,d);
-			break;
-		case 4:
-			exit(0);
-			break;
-	}
+int atacarHumano(Zumbi z1){
+	int VidaH=4000, Sh=200, Sz=300, opt, maismenos, atk;
+	float hp;
+	hp=z1.getHealth();
+	do{
+		system("cls");
+		cout << "HP humano: " << VidaH << "    ";
+		cout << "HP " << z1.getName() << ": " << hp;
+		cout << "\n1- Ataque normal;";
+		cout << "\n2- Mordida (custa pontos de vida);\n\n";
+		cin >> opt;
+		switch(opt){
+			case 1:
+				maismenos=rand() % 2;
+				atk=rand() % 201;
+				if (maismenos==1){
+					VidaH=VidaH-(Sz+atk);
+					if (hp<0){
+						hp=0;
+					}
+				}else{
+					VidaH=VidaH-(Sh-atk);
+					if (hp<0){
+						hp=0;
+					}
+				}
+				break;
+			case 2:
+				hp=hp-200;
+				maismenos=rand() % 2;
+				atk=rand() % 201;
+				if (maismenos==1){
+					VidaH=VidaH-(Sz+atk)-100;
+					if (hp<0){
+						hp=0;
+					}
+				}else{
+					VidaH=VidaH-(Sz-atk)-100;
+					if (hp<0){
+						hp=0;
+					}
+				}
+				break;
+		}
+				maismenos=rand() % 2;
+				atk=rand() % 101;
+				if (maismenos==1){
+					hp=hp-(Sh+atk);
+					if (hp<0){
+						hp=0;
+					}
+					z1.setHealth(hp);
+				}else{
+					hp=hp-(Sh-atk);
+					if (hp<0){
+						hp=0;
+					}
+					z1.setHealth(hp);
+				}
+	}while((hp>0) && (VidaH>0));
+	if (hp==0){
+	return 0;
+	}else{
+	return 1;
+    }
 }
 
-void verificarMapa(char mapa[tam][tam], char d, int x, int y, int *l, int *c){
-	int i, j;
+void verificarMapa(char mapa[tam][tam], char d, int x, int y, int *l, int *c, Zumbi z1){
+	int i, j, v, opt;    
 	switch(d){
 		case '1':
 			if(mapa[x+1][y-1]=='1'){
@@ -65,7 +99,14 @@ void verificarMapa(char mapa[tam][tam], char d, int x, int y, int *l, int *c){
 			    *l=x+1;
 			    *c=y-1;
 			}else if(mapa[x+1][y-1]=='H'){
+				v=atacarHumano(z1);
+				if (v==1){
 			    mapa[x+1][y-1]='Z';
+			    }else{
+			    cout << "Voce perdeu. Aperte qualquer botao para sair: ";
+			    cin >> opt;
+			    exit(0);
+			    }
 			}
 		    break;
 		case '2':
@@ -76,7 +117,14 @@ void verificarMapa(char mapa[tam][tam], char d, int x, int y, int *l, int *c){
 			    mapa[x][y]='1';
 			    *l=x+1;
 			}else if(mapa[x+1][y]=='H'){
+				v=atacarHumano(z1);
+				if (v==1){
 			    mapa[x+1][y]='Z';
+			    }else{
+			    cout << "Voce perdeu. Aperte qualquer botao para sair: ";
+			    cin >> opt;
+			    exit(0);
+			    }
 		    }
 		    break;
 		case '3':
@@ -86,7 +134,14 @@ void verificarMapa(char mapa[tam][tam], char d, int x, int y, int *l, int *c){
 			    *l=x+1;
 			    *c=y+1;
 			}else if(mapa[x+1][y+1]=='H'){
+				v=atacarHumano(z1);
+				if (v==1){
 			    mapa[x+1][y+1]='Z';
+			    }else{
+			    cout << "Voce perdeu. Aperte qualquer botao para sair: ";
+			    cin >> opt;
+			    exit(0);
+			    }
 		    }
 		    break;
 		case '4':
@@ -97,7 +152,14 @@ void verificarMapa(char mapa[tam][tam], char d, int x, int y, int *l, int *c){
 			    mapa[x][y]='1';
 			    *c=y-1;
 			}else if(mapa[x][y-1]=='H'){
+				v=atacarHumano(z1);
+				if (v==1){
 			    mapa[x][y-1]='Z';
+			    }else{
+			    cout << "Voce perdeu. Aperte qualquer botao para sair: ";
+			    cin >> opt;
+			    exit(0);
+			    }
 		    }
 		    break;
 		case '6':
@@ -108,7 +170,14 @@ void verificarMapa(char mapa[tam][tam], char d, int x, int y, int *l, int *c){
 			    mapa[x][y]='1';
 			    *c=y+1;
 			}else if(mapa[x][y+1]=='H'){
+				v=atacarHumano(z1);
+				if (v==1){
 			    mapa[x][y+1]='Z';
+			    }else{
+			    cout << "Voce perdeu. Aperte qualquer botao para sair: ";
+			    cin >> opt;
+			    exit(0);
+			    }
 		    }
 		    break;
 		case '7':
@@ -118,7 +187,14 @@ void verificarMapa(char mapa[tam][tam], char d, int x, int y, int *l, int *c){
 			    *l=x-1;
 			    *c=y-1;
 			}else if(mapa[x-1][y-1]=='H'){
+				v=atacarHumano(z1);
+				if (v==1){
 			    mapa[x-1][y-1]='Z';
+			    }else{
+			    cout << "Voce perdeu. Aperte qualquer botao para sair: ";
+			    cin >> opt;
+			    exit(0);
+			    }
 		    }
 		    break;
 		case '8':
@@ -129,7 +205,14 @@ void verificarMapa(char mapa[tam][tam], char d, int x, int y, int *l, int *c){
 			    mapa[x][y]='1';
 			    *l=x-1;
 			}else if(mapa[x-1][y]=='H'){
+				v=atacarHumano(z1);
+				if (v==1){
 			    mapa[x-1][y]='Z';
+			    }else{
+			    cout << "Voce perdeu. Aperte qualquer botao para sair: ";
+			    cin >> opt;
+			    exit(0);
+			    }
 		    }
 		    break;
 		case '9':
@@ -139,7 +222,14 @@ void verificarMapa(char mapa[tam][tam], char d, int x, int y, int *l, int *c){
 			    *l=x-1;
 			    *c=x+1;
 			}else if(mapa[x-1][y+1]=='H'){
+				v=atacarHumano(z1);
+				if (v==1){
 			    mapa[x-1][y+1]='Z';
+			    }else{
+			    cout << "Voce perdeu. Aperte qualquer botao para sair: ";
+			    cin >> opt;
+			    exit(0);
+			    }
 		    }
 		    break;
 		default:
@@ -160,12 +250,12 @@ void procurarMapa(char mapa[tam][tam], int *l, int *c){
 	}
 }	
 
-void andarMapa(char mapa[tam][tam], char d){
+void andarMapa(char mapa[tam][tam], char d, Zumbi z1){
 	int opt, x, y;
 	    procurarMapa(mapa,&x,&y);
 	    do{
 	    system("cls");
-		verificarMapa(mapa,d,x,y,&x,&y);
+		verificarMapa(mapa,d,x,y,&x,&y,z1);
 		exibirMapa(mapa);
 		d=getche();
 	    }while(d!='0');
@@ -200,14 +290,6 @@ void exibirMapa(char mapa[tam][tam]){
 	}
 }
 
-void escolha2(int opt){
-	system("cls");
-    if (opt==0)
-     exit(0);
-    else
-     system("cls");
-}
-
 void iniciarMapa(char mapa[tam][tam]){
 	int i, j, c;
 	for (i=0;i<=(tam-21);i++){
@@ -235,6 +317,47 @@ void iniciarMapa(char mapa[tam][tam]){
 			mapa[i][j]='H';
 		}
 	}
+}
+
+void escolha(int op, Zumbi z1, char mapa[tam][tam]){
+	int opt, i, j;
+	char d;
+	switch(op){
+		case 1:
+			system("cls");
+			cout << "Nome: " << z1.getName();
+			cout << "\nPontos de vida: " << z1.getHealth();
+			cout << "\nVelocidade: " << z1.getSpeed() << "\n";
+			cout << "\nDeseja voltar ao menu? (s=1/n=0): ";
+			cin >> opt;
+			escolha2(opt);
+			break;
+		case 2:
+			system("cls");
+			exibirMapa(mapa);
+			cout << "\nDeseja voltar ao menu? (s=1/n=0): ";
+			cin >> opt;
+			escolha2(opt);
+			break;
+		case 3:
+			system("cls");
+			exibirMapa(mapa);
+			cout << "\nUse o numpad para andar: ";
+			d=getche();
+			andarMapa(mapa,d,z1);
+			break;
+		case 4:
+			exit(0);
+			break;
+	}
+}
+
+void escolha2(int opt){
+	system("cls");
+    if (opt==0)
+     exit(0);
+    else
+     system("cls");
 }
 
 int menu(void){
@@ -268,4 +391,34 @@ int main(){
 	op=menu();
 	escolha(op,z1,mapa);
     }while(op!=4);
+}
+
+Zumbi::Zumbi(string name){
+	nome=name;
+}
+
+void Zumbi::setName(string name){
+	nome=name;
+}
+
+void Zumbi::setHealth(float x){
+	if (x>=0)
+	HP=x;
+}
+
+void Zumbi::setSpeed(int s){
+	if (s>0)
+	velocidade=s;
+}
+
+float Zumbi::getHealth(){
+	return HP;
+}
+
+string Zumbi::getName(){
+	return nome;
+}
+
+int Zumbi::getSpeed(){
+	return velocidade;
 }
