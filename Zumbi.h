@@ -15,4 +15,5 @@ class Zumbi {
 		string getName();
 		int getSpeed();
 		float getHealth();
+		int atacarHumano();
 };

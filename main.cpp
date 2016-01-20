@@ -18,13 +18,11 @@ void exibirMapa(char mapa[tam][tam]);
 void andarMapa(char mapa[tam][tam], char d);
 void verificarMapa(char mapa[tam][tam], char d, int x, int y, int *l, int *c);
 void procurarMapa(char mapa[tam][tam], int *l, int *c);
-int atacarHumano(Zumbi z1);
 
 HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE);
 
 int main(){
 	SetConsoleTextAttribute(console,15);
-	srand(time(NULL));
 	cout << "Digite o nome do zumbi: ";
 	string nome1;
 	cin >> nome1;
@@ -43,72 +41,7 @@ int main(){
     }while(op!=4);
 }
 
-int atacarHumano(Zumbi z1){
-	int VidaH=4000, Sh=200, Sz=300, opt, maismenos, atk;
-	float hp;
-	hp=z1.getHealth();
-	do{
-		system("cls");
-		cout << "HP humano: " << VidaH << "    ";
-		cout << "HP " << z1.getName() << ": " << hp;
-		cout << "\n1- Ataque normal;";
-		cout << "\n2- Mordida (custa pontos de vida);\n\n";
-		cin >> opt;
-		switch(opt){
-			case 1:
-				maismenos=rand() % 2;
-				atk=rand() % 201;
-				if (maismenos==1){
-					VidaH=VidaH-(Sz+atk);
-					if (hp<0){
-						hp=0;
-					}
-				}else{
-					VidaH=VidaH-(Sh-atk);
-					if (hp<0){
-						hp=0;
-					}
-				}
-				break;
-			case 2:
-				hp=hp-200;
-				maismenos=rand() % 2;
-				atk=rand() % 201;
-				if (maismenos==1){
-					VidaH=VidaH-(Sz+atk+100);
-					if (hp<0){
-						hp=0;
-					}
-				}else{
-					VidaH=VidaH-(Sz-atk+100);
-					if (hp<0){
-						hp=0;
-					}
-				}
-				break;
-		}
-				maismenos=rand() % 2;
-				atk=rand() % 101;
-				if (maismenos==1){
-					hp=hp-(Sh+atk);
-					if (hp<0){
-						hp=0;
-					}
-					z1.setHealth(hp);
-				}else{
-					hp=hp-(Sh-atk);
-					if (hp<0){
-						hp=0;
-					}
-					z1.setHealth(hp);
-				}
-	}while((hp>0) && (VidaH>0));
-	if (hp==0){
-	return 0;
-	}else{
-	return 1;
-    }
-}
+
 
 void verificarMapa(char mapa[tam][tam], char d, int x, int y, int *l, int *c, Zumbi z1){
 	int i, j, v, opt;    
@@ -120,7 +53,7 @@ void verificarMapa(char mapa[tam][tam], char d, int x, int y, int *l, int *c, Zu
 			    *l=x+1;
 			    *c=y-1;
 			}else if(mapa[x+1][y-1]=='H'){
-				v=atacarHumano(z1);
+				v=z1.atacarHumano();
 				if (v==1){
 			    mapa[x+1][y-1]='Z';
 			    }else{
@@ -138,7 +71,7 @@ void verificarMapa(char mapa[tam][tam], char d, int x, int y, int *l, int *c, Zu
 			    mapa[x][y]='1';
 			    *l=x+1;
 			}else if(mapa[x+1][y]=='H'){
-				v=atacarHumano(z1);
+				v=z1.atacarHumano();
 				if (v==1){
 			    mapa[x+1][y]='Z';
 			    }else{
@@ -155,7 +88,7 @@ void verificarMapa(char mapa[tam][tam], char d, int x, int y, int *l, int *c, Zu
 			    *l=x+1;
 			    *c=y+1;
 			}else if(mapa[x+1][y+1]=='H'){
-				v=atacarHumano(z1);
+				v=z1.atacarHumano();
 				if (v==1){
 			    mapa[x+1][y+1]='Z';
 			    }else{
@@ -173,7 +106,7 @@ void verificarMapa(char mapa[tam][tam], char d, int x, int y, int *l, int *c, Zu
 			    mapa[x][y]='1';
 			    *c=y-1;
 			}else if(mapa[x][y-1]=='H'){
-				v=atacarHumano(z1);
+				v=z1.atacarHumano();
 				if (v==1){
 			    mapa[x][y-1]='Z';
 			    }else{
@@ -191,7 +124,7 @@ void verificarMapa(char mapa[tam][tam], char d, int x, int y, int *l, int *c, Zu
 			    mapa[x][y]='1';
 			    *c=y+1;
 			}else if(mapa[x][y+1]=='H'){
-				v=atacarHumano(z1);
+				v=z1.atacarHumano();
 				if (v==1){
 			    mapa[x][y+1]='Z';
 			    }else{
@@ -208,7 +141,7 @@ void verificarMapa(char mapa[tam][tam], char d, int x, int y, int *l, int *c, Zu
 			    *l=x-1;
 			    *c=y-1;
 			}else if(mapa[x-1][y-1]=='H'){
-				v=atacarHumano(z1);
+				v=z1.atacarHumano();
 				if (v==1){
 			    mapa[x-1][y-1]='Z';
 			    }else{
@@ -226,7 +159,7 @@ void verificarMapa(char mapa[tam][tam], char d, int x, int y, int *l, int *c, Zu
 			    mapa[x][y]='1';
 			    *l=x-1;
 			}else if(mapa[x-1][y]=='H'){
-				v=atacarHumano(z1);
+				v=z1.atacarHumano();
 				if (v==1){
 			    mapa[x-1][y]='Z';
 			    }else{
@@ -243,7 +176,7 @@ void verificarMapa(char mapa[tam][tam], char d, int x, int y, int *l, int *c, Zu
 			    *l=x-1;
 			    *c=x+1;
 			}else if(mapa[x-1][y+1]=='H'){
-				v=atacarHumano(z1);
+				v=z1.atacarHumano();
 				if (v==1){
 			    mapa[x-1][y+1]='Z';
 			    }else{
