@@ -29,7 +29,7 @@ IncludeVersionInfo=0
 SupportXPThemes=0
 CompilerSet=0
 CompilerSettings=0000000000000000001000000
-UnitCount=2
+UnitCount=3
 
 [VersionInfo]
 Major=1
@@ -51,7 +51,7 @@ AutoIncBuildNr=0
 SyncProduct=1
 
 [Unit1]
-FileName=Zumbi.cpp
+FileName=main.cpp
 CompileCpp=1
 Folder=Zumbi
 Compile=1
@@ -70,8 +70,8 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit3]
-FileName=Zumbi.h
+[Unit4]
+FileName=Mapa.cpp
 CompileCpp=1
 Folder=Zumbi
 Compile=1
@@ -80,10 +80,10 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit4]
-FileName=Mapa.cpp
+[Unit3]
+FileName=Zumbi.cpp
 CompileCpp=1
-Folder=Zumbi
+Folder=
 Compile=1
 Link=1
 Priority=1000
