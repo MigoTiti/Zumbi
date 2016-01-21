@@ -2,11 +2,28 @@
 #include <random>
 #include <ctime>
 #include <iostream>
+#include <conio.h>
 
 #define vh 4000
 
 Zumbi::Zumbi(string name){
 	nome=name;
+}
+
+int Zumbi::getA(){
+    return a;
+}
+
+int Zumbi::getC(){
+	return c;
+}
+
+void Zumbi::setA(){
+	a=1;
+}
+
+void Zumbi::setC(){
+	c=1;
 }
 
 void Zumbi::setName(string name){
@@ -35,27 +52,48 @@ int Zumbi::getSpeed(){
 	return velocidade;
 }
 
-void Zumbi::pegarItem(string item){
+void Zumbi::pegarItem(char item){
 	switch(item){
-		case ''
+		case 'C':
+			cout << "Voce pegou um capacete, +200 de vida.";
+			setC();
+			do{
+				cin.get();
+			    }while(cin.get()!='\n');
+			system("cls");
+			break;
+		case 'A':
+			cout << "Voce pegou uma armadura, +500 de vida.";
+			setA();
+			do{
+				cin.get();
+			    }while(cin.get()!='\n');
+			system("cls");
+			break;
 	}
 }
 
 int Zumbi::atacarHumano(){
-	int VidaH=vh, Sh=200, Sz=300, opt, maismenos, atk, total;
+	int VidaH=vh, Sh=200, Sz=300, maismenos, atk, total;
 	float hp;
-	char c;
+	char c, opt;
 	srand(time(NULL));
 	hp=getHealth();
+	if(getA()==1){
+		hp=hp+500;
+	}
+	if(getC()==1){
+		hp=hp+200;
+	}
 	do{
 		system("cls");
 		cout << "HP humano: " << VidaH << "    ";
 		cout << "HP " << getName() << ": " << hp;
 		cout << "\n1- Ataque normal;";
 		cout << "\n2- Mordida (custa pontos de vida);\n\n";
-		cin >> opt;
+		opt=getche();
 		switch(opt){
-			case 1:
+			case '1':
 				maismenos=rand() % 2;
 				atk=rand() % 201;
 				if (maismenos==1){
@@ -71,12 +109,13 @@ int Zumbi::atacarHumano(){
 						hp=0;
 					}
 				}
+				system("cls");
 				cout << getName() << " usou Ataque normal, causando " << total << " de dano.";
 				do{
 				cin.get();
 			    }while(cin.get()!='\n');
 				break;
-			case 2:
+			case '2':
 				hp=hp-200;
 				maismenos=rand() % 2;
 				atk=rand() % 201;
@@ -93,6 +132,7 @@ int Zumbi::atacarHumano(){
 						hp=0;
 					}
 				}
+				system("cls");
 				cout << getName() << " usou Mordida, causando " << total << " de dano e recebendo 200 de dano colateral";
 				do{
 				cin.get();
@@ -116,7 +156,7 @@ int Zumbi::atacarHumano(){
 					}
 					setHealth(hp);
 				}
-				cout << "\nHumano usou Ataque normal, causando " << total << " de dano.";
+				cout << "Humano usou Ataque normal, causando " << total << " de dano.";
 				do{
 				cin.get();
 			    }while(cin.get()!='\n');

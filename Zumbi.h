@@ -2,11 +2,7 @@
 
 using namespace std;
 
-class Zumbi {
-	private:
-		string nome;
-		int velocidade;
-		float hp;
+class Zumbi{
 	public:
 		Zumbi(string);
 		void setName(string);
@@ -16,5 +12,14 @@ class Zumbi {
 		int getSpeed();
 		float getHealth();
 		int atacarHumano();
-		void pegarItem(string);
+		void pegarItem(char);
+		void setC();
+		void setA();
+		int getA();
+		int getC();
+	private:
+		string nome;
+		int velocidade;
+		float hp;
+		int c=0, a=0;
 };
