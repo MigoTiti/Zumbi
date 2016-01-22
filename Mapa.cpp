@@ -127,11 +127,11 @@ void Mapa::verificarMapa(Mapa *m1, char d, int x, int y, int *l, int *c, Zumbi *
 				v=z1->atacarHumano();
 				if (v==1){
 			    mapa[x+1][y-1]='Z';
-			    }else{
+			    }else if (v==0){
 			    cout << "Voce perdeu. Aperte qualquer botao para sair: ";
 				cin.get();
 			    exit(0);
-			    }
+                }
 			}else if((mapa[x+1][y-1]=='A') || (mapa[x+1][y-1]=='C')){
 				z1->pegarItem(mapa[x+1][y-1],z1);
 				mapa[x+1][y-1]='1';
@@ -148,11 +148,11 @@ void Mapa::verificarMapa(Mapa *m1, char d, int x, int y, int *l, int *c, Zumbi *
 				v=z1->atacarHumano();
 				if (v==1){
 			    mapa[x+1][y]='Z';
-			    }else{
+			    }else if (v==0){
 			    cout << "Voce perdeu. Aperte qualquer botao para sair: ";
-			    cin.get();
+				cin.get();
 			    exit(0);
-			    }
+                }
 		    }else if((mapa[x+1][y]=='A') || (mapa[x+1][y]=='C')){
 				z1->pegarItem(mapa[x+1][y],z1);
 				mapa[x+1][y]='1';
@@ -168,11 +168,11 @@ void Mapa::verificarMapa(Mapa *m1, char d, int x, int y, int *l, int *c, Zumbi *
 				v=z1->atacarHumano();
 				if (v==1){
 			    mapa[x+1][y+1]='Z';
-			    }else{
+			    }else if (v==0){
 			    cout << "Voce perdeu. Aperte qualquer botao para sair: ";
 				cin.get();
 			    exit(0);
-			    }
+                }
 		    }else if((mapa[x+1][y+1]=='A') || (mapa[x+1][y+1]=='C')){
 				z1->pegarItem(mapa[x+1][y+1],z1);
 				mapa[x+1][y+1]='1';
@@ -189,11 +189,11 @@ void Mapa::verificarMapa(Mapa *m1, char d, int x, int y, int *l, int *c, Zumbi *
 				v=z1->atacarHumano();
 				if (v==1){
 			    mapa[x][y-1]='Z';
-			    }else{
+			    }else if (v==0){
 			    cout << "Voce perdeu. Aperte qualquer botao para sair: ";
 				cin.get();
 			    exit(0);
-			    }
+                }
 		    }else if((mapa[x][y-1]=='A') || (mapa[x][y-1]=='C')){
 				z1->pegarItem(mapa[x][y-1],z1);
 				mapa[x][y-1]='1';
@@ -210,11 +210,11 @@ void Mapa::verificarMapa(Mapa *m1, char d, int x, int y, int *l, int *c, Zumbi *
 				v=z1->atacarHumano();
 				if (v==1){
 			    mapa[x][y+1]='Z';
-			    }else{
+			    }else if (v==0){
 			    cout << "Voce perdeu. Aperte qualquer botao para sair: ";
 				cin.get();
 			    exit(0);
-			    }
+                }
 		    }else if((mapa[x][y+1]=='A') || (mapa[x][y+1]=='C')){
 				z1->pegarItem(mapa[x][y+1],z1);
 				mapa[x][y+1]='1';
@@ -230,11 +230,11 @@ void Mapa::verificarMapa(Mapa *m1, char d, int x, int y, int *l, int *c, Zumbi *
 				v=z1->atacarHumano();
 				if (v==1){
 			    mapa[x-1][y-1]='Z';
-			    }else{
+			    }else if (v==0){
 			    cout << "Voce perdeu. Aperte qualquer botao para sair: ";
 				cin.get();
 			    exit(0);
-			    }
+                }
 		    }else if((mapa[x-1][y-1]=='A') || (mapa[x-1][y-1]=='C')){
 				z1->pegarItem(mapa[x-1][y-1],z1);
 				mapa[x-1][y-1]='1';
@@ -251,11 +251,11 @@ void Mapa::verificarMapa(Mapa *m1, char d, int x, int y, int *l, int *c, Zumbi *
 				v=z1->atacarHumano();
 				if (v==1){
 			    mapa[x-1][y]='Z';
-			    }else{
+			    }else if (v==0){
 			    cout << "Voce perdeu. Aperte qualquer botao para sair: ";
 				cin.get();
 			    exit(0);
-			    }
+                }
 		    }else if((mapa[x-1][y]=='A') || (mapa[x-1][y]=='C')){
 				z1->pegarItem(mapa[x-1][y],z1);
                 mapa[x-1][y]='1';
@@ -271,7 +271,7 @@ void Mapa::verificarMapa(Mapa *m1, char d, int x, int y, int *l, int *c, Zumbi *
 				v=z1->atacarHumano();
 				if (v==1){
 			    mapa[x-1][y+1]='Z';
-			    }else{
+			    }else if (v==0){
 			    cout << "Voce perdeu. Aperte qualquer botao para sair: ";
 				cin.get();
 			    exit(0);

@@ -93,7 +93,8 @@ int Zumbi::atacarHumano(){
 		cout << "HP humano: " << VidaH << "    ";
 		cout << "HP " << getName() << ": " << hp;
 		cout << "\n1- Ataque normal;";
-		cout << "\n2- Mordida (custa pontos de vida);\n\n";
+		cout << "\n2- Mordida (custa pontos de vida);";
+        cout << "\n3- Fugir; \n\n";
 		opt=getche();
 		switch(opt){
 			case '1':
@@ -141,6 +142,9 @@ int Zumbi::atacarHumano(){
 				cin.get();
 			    }while(cin.get()!='\n');
 				break;
+            case '3':
+                    system("cls");
+                    return 2;
 		}
 				maismenos=rand() % 2;
 				atk=rand() % 101;
@@ -165,8 +169,10 @@ int Zumbi::atacarHumano(){
 			    }while(cin.get()!='\n');
 	}while((hp>0) && (VidaH>0));
 	if (hp==0){
+    system("cls");
 	return 0;
 	}else{
+    system("cls");
 	return 1;
     }
 }
