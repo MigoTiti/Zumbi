@@ -52,11 +52,12 @@ int Zumbi::getSpeed(){
 	return velocidade;
 }
 
-void Zumbi::pegarItem(char item){
+void Zumbi::pegarItem(char item, Zumbi *z1){
 	switch(item){
 		case 'C':
 			cout << "Voce pegou um capacete, +200 de vida.";
 			setC();
+			z1->c=1;
 			do{
 				cin.get();
 			    }while(cin.get()!='\n');
@@ -65,6 +66,7 @@ void Zumbi::pegarItem(char item){
 		case 'A':
 			cout << "Voce pegou uma armadura, +500 de vida.";
 			setA();
+			z1->a=1;
 			do{
 				cin.get();
 			    }while(cin.get()!='\n');
@@ -76,8 +78,9 @@ void Zumbi::pegarItem(char item){
 int Zumbi::atacarHumano(){
 	int VidaH=vh, Sh=200, Sz=300, maismenos, atk, total;
 	float hp;
-	char c, opt;
+	char opt;
 	srand(time(NULL));
+	setHealth(5000);
 	hp=getHealth();
 	if(getA()==1){
 		hp=hp+500;

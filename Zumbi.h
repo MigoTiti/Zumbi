@@ -12,7 +12,7 @@ class Zumbi{
 		int getSpeed();
 		float getHealth();
 		int atacarHumano();
-		void pegarItem(char);
+		void pegarItem(char,Zumbi *);
 		void setC();
 		void setA();
 		int getA();
@@ -21,5 +21,5 @@ class Zumbi{
 		string nome;
 		int velocidade;
 		float hp;
-		int c=0, a=0;
+		int c=0, a=0; // Armadura/capacete
 };

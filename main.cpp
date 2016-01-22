@@ -8,7 +8,7 @@
 using namespace std;
 
 void escolha2(int opt);
-void escolha(int op, Zumbi z1, Mapa m1);
+void escolha(int op, Zumbi z1, Mapa *m1);
 int menu();
 
 HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -24,32 +24,32 @@ int main(){
 	z1.setHealth(5000);
 	
     Mapa m1(30);
-	m1.iniciarMapa(m1,8);
+	m1.iniciarMapa(&m1,8);
 	
 	int op;
 	do{
 	op=menu();
-	escolha(op,z1,m1);
+	escolha(op,z1,&m1);
     }while(op!=3);
 }	
 
-void escolha(int op, Zumbi z1, Mapa m1){
+void escolha(int op, Zumbi z1, Mapa *m1){
 	int opt, i, j;
 	char d;
 	switch(op){
 		case 1:
 			system("cls");
-			m1.exibirMapa(m1);
+			m1->exibirMapa(m1);
 			cout << "\nDeseja voltar ao menu? (s=1/n=0): ";
 			cin >> opt;
 			escolha2(opt);
 			break;
 		case 2:
 			system("cls");
-			m1.exibirMapa(m1);
+			m1->exibirMapa(m1);
 			cout << "\nUse o numpad para andar: ";
 			d=getche();
-			m1.andarMapa(m1,d,z1);
+			m1->andarMapa(m1,d,&z1);
 			break;
 		case 3:
 			exit(0);

@@ -7,7 +7,7 @@ Mapa::Mapa(int tamanho){
 	tam=tamanho;
 }
 
-void Mapa::iniciarMapa(Mapa m1, int humans){
+void Mapa::iniciarMapa(Mapa *m1, int humans){
 	int i, j, c;
 	for (i=0;i<=(tam-21);i++){
 		for (j=0;j<=(tam-1);j++){
@@ -34,27 +34,29 @@ void Mapa::iniciarMapa(Mapa m1, int humans){
 			mapa[i][j]='H';
 		}
 	}
-	for (c=0;c<1;c++){
+	do{
 		i=rand() % 30;
 		j=rand() % 30;
 		if (((i==15) && (j==0)) || (mapa[i][j]=='0') || (mapa[i][j]=='H')){
-			c--;
+			c=1;
 		}else{
 			mapa[i][j]='C';
+			c=0;
 		}
-	}
-	for (c=0;c<1;c++){
+	}while(c>0);
+	do{
 		i=rand() % 30;
 		j=rand() % 30;
 		if (((i==15) && (j==0)) || (mapa[i][j]=='0') || (mapa[i][j]=='H') || (mapa[i][j] == 'C')){
-			c--;
+			c=1;
 		}else{
 			mapa[i][j]='A';
+			c=0;
 		}
-	}
+	}while(c>0);
 }
 
-void Mapa::exibirMapa(Mapa m1){
+void Mapa::exibirMapa(Mapa *m1){
 	int i, j;
 	HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE);
 	for (i=0;i<=(tam-1);i++){
@@ -89,7 +91,7 @@ void Mapa::exibirMapa(Mapa m1){
 	}
 }
 
-void Mapa::andarMapa(Mapa m1, char d, Zumbi z1){
+void Mapa::andarMapa(Mapa *m1, char d, Zumbi *z1){
 	int opt, x, y;
 	    procurarMapa(m1,&x,&y);
 	    do{
@@ -100,7 +102,7 @@ void Mapa::andarMapa(Mapa m1, char d, Zumbi z1){
 	    }while(d!='0');
 }
 
-void Mapa::procurarMapa(Mapa m1, int *l, int *c){
+void Mapa::procurarMapa(Mapa *m1, int *l, int *c){
 	int i, j;
 	for (i=0;i<=(tam-1);i++){
 		for (j=0;j<=(tam-1);j++){
@@ -112,7 +114,7 @@ void Mapa::procurarMapa(Mapa m1, int *l, int *c){
 	}
 }
 
-void Mapa::verificarMapa(Mapa m1, char d, int x, int y, int *l, int *c, Zumbi z1){
+void Mapa::verificarMapa(Mapa *m1, char d, int x, int y, int *l, int *c, Zumbi *z1){
 	int i, j, v, opt;    
 	switch(d){
 		case '1':
@@ -122,7 +124,7 @@ void Mapa::verificarMapa(Mapa m1, char d, int x, int y, int *l, int *c, Zumbi z1
 			    *l=x+1;
 			    *c=y-1;
 			}else if(mapa[x+1][y-1]=='H'){
-				v=z1.atacarHumano();
+				v=z1->atacarHumano();
 				if (v==1){
 			    mapa[x+1][y-1]='Z';
 			    }else{
@@ -131,7 +133,7 @@ void Mapa::verificarMapa(Mapa m1, char d, int x, int y, int *l, int *c, Zumbi z1
 			    exit(0);
 			    }
 			}else if((mapa[x+1][y-1]=='A') || (mapa[x+1][y-1]=='C')){
-				z1.pegarItem(mapa[x+1][y-1]);
+				z1->pegarItem(mapa[x+1][y-1],z1);
 				mapa[x+1][y-1]='1';
 			}
 		    break;
@@ -143,7 +145,7 @@ void Mapa::verificarMapa(Mapa m1, char d, int x, int y, int *l, int *c, Zumbi z1
 			    mapa[x][y]='1';
 			    *l=x+1;
 			}else if(mapa[x+1][y]=='H'){
-				v=z1.atacarHumano();
+				v=z1->atacarHumano();
 				if (v==1){
 			    mapa[x+1][y]='Z';
 			    }else{
@@ -152,7 +154,7 @@ void Mapa::verificarMapa(Mapa m1, char d, int x, int y, int *l, int *c, Zumbi z1
 			    exit(0);
 			    }
 		    }else if((mapa[x+1][y]=='A') || (mapa[x+1][y]=='C')){
-				z1.pegarItem(mapa[x+1][y]);
+				z1->pegarItem(mapa[x+1][y],z1);
 				mapa[x+1][y]='1';
 			}
 		    break;
@@ -163,7 +165,7 @@ void Mapa::verificarMapa(Mapa m1, char d, int x, int y, int *l, int *c, Zumbi z1
 			    *l=x+1;
 			    *c=y+1;
 			}else if(mapa[x+1][y+1]=='H'){
-				v=z1.atacarHumano();
+				v=z1->atacarHumano();
 				if (v==1){
 			    mapa[x+1][y+1]='Z';
 			    }else{
@@ -172,7 +174,7 @@ void Mapa::verificarMapa(Mapa m1, char d, int x, int y, int *l, int *c, Zumbi z1
 			    exit(0);
 			    }
 		    }else if((mapa[x+1][y+1]=='A') || (mapa[x+1][y+1]=='C')){
-				z1.pegarItem(mapa[x+1][y+1]);
+				z1->pegarItem(mapa[x+1][y+1],z1);
 				mapa[x+1][y+1]='1';
 			}
 		    break;
@@ -184,7 +186,7 @@ void Mapa::verificarMapa(Mapa m1, char d, int x, int y, int *l, int *c, Zumbi z1
 			    mapa[x][y]='1';
 			    *c=y-1;
 			}else if(mapa[x][y-1]=='H'){
-				v=z1.atacarHumano();
+				v=z1->atacarHumano();
 				if (v==1){
 			    mapa[x][y-1]='Z';
 			    }else{
@@ -193,7 +195,7 @@ void Mapa::verificarMapa(Mapa m1, char d, int x, int y, int *l, int *c, Zumbi z1
 			    exit(0);
 			    }
 		    }else if((mapa[x][y-1]=='A') || (mapa[x][y-1]=='C')){
-				z1.pegarItem(mapa[x][y-1]);
+				z1->pegarItem(mapa[x][y-1],z1);
 				mapa[x][y-1]='1';
 			}
 		    break;
@@ -205,7 +207,7 @@ void Mapa::verificarMapa(Mapa m1, char d, int x, int y, int *l, int *c, Zumbi z1
 			    mapa[x][y]='1';
 			    *c=y+1;
 			}else if(mapa[x][y+1]=='H'){
-				v=z1.atacarHumano();
+				v=z1->atacarHumano();
 				if (v==1){
 			    mapa[x][y+1]='Z';
 			    }else{
@@ -214,7 +216,7 @@ void Mapa::verificarMapa(Mapa m1, char d, int x, int y, int *l, int *c, Zumbi z1
 			    exit(0);
 			    }
 		    }else if((mapa[x][y+1]=='A') || (mapa[x][y+1]=='C')){
-				z1.pegarItem(mapa[x][y+1]);
+				z1->pegarItem(mapa[x][y+1],z1);
 				mapa[x][y+1]='1';
 			}
 		    break;
@@ -225,7 +227,7 @@ void Mapa::verificarMapa(Mapa m1, char d, int x, int y, int *l, int *c, Zumbi z1
 			    *l=x-1;
 			    *c=y-1;
 			}else if(mapa[x-1][y-1]=='H'){
-				v=z1.atacarHumano();
+				v=z1->atacarHumano();
 				if (v==1){
 			    mapa[x-1][y-1]='Z';
 			    }else{
@@ -234,7 +236,7 @@ void Mapa::verificarMapa(Mapa m1, char d, int x, int y, int *l, int *c, Zumbi z1
 			    exit(0);
 			    }
 		    }else if((mapa[x-1][y-1]=='A') || (mapa[x-1][y-1]=='C')){
-				z1.pegarItem(mapa[x-1][y-1]);
+				z1->pegarItem(mapa[x-1][y-1],z1);
 				mapa[x-1][y-1]='1';
 			}
 		    break;
@@ -246,7 +248,7 @@ void Mapa::verificarMapa(Mapa m1, char d, int x, int y, int *l, int *c, Zumbi z1
 			    mapa[x][y]='1';
 			    *l=x-1;
 			}else if(mapa[x-1][y]=='H'){
-				v=z1.atacarHumano();
+				v=z1->atacarHumano();
 				if (v==1){
 			    mapa[x-1][y]='Z';
 			    }else{
@@ -255,7 +257,7 @@ void Mapa::verificarMapa(Mapa m1, char d, int x, int y, int *l, int *c, Zumbi z1
 			    exit(0);
 			    }
 		    }else if((mapa[x-1][y]=='A') || (mapa[x-1][y]=='C')){
-				z1.pegarItem(mapa[x-1][y]);
+				z1->pegarItem(mapa[x-1][y],z1);
                 mapa[x-1][y]='1';
 			}
 		    break;
@@ -266,7 +268,7 @@ void Mapa::verificarMapa(Mapa m1, char d, int x, int y, int *l, int *c, Zumbi z1
 			    *l=x-1;
 			    *c=x+1;
 			}else if(mapa[x-1][y+1]=='H'){
-				v=z1.atacarHumano();
+				v=z1->atacarHumano();
 				if (v==1){
 			    mapa[x-1][y+1]='Z';
 			    }else{
@@ -275,7 +277,7 @@ void Mapa::verificarMapa(Mapa m1, char d, int x, int y, int *l, int *c, Zumbi z1
 			    exit(0);
 			    }
 		    }else if((mapa[x-1][y+1]=='A') || (mapa[x-1][y+1]=='C')){
-				z1.pegarItem(mapa[x-1][y+1]);
+				z1->pegarItem(mapa[x-1][y+1],z1);
 				mapa[x-1][y+1]='1';
 			}
 		    break;
