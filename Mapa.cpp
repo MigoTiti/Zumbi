@@ -286,4 +286,3 @@ void Mapa::verificarMapa(Mapa *m1, char d, int x, int y, int *l, int *c, Zumbi *
 			break;
 	}	
 }
-

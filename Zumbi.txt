@@ -1,0 +1,1 @@
+./Debug/main.cpp.o ./Debug/Zumbi.cpp.o ./Debug/Mapa.cpp.o   
