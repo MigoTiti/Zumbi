@@ -60,7 +60,7 @@ void escolha(int op, Zumbi z1, Mapa1 *m1, Mapa2 *m2){
 		default:
 			cout << "Comando invalido";
 	}
-	if (c==8){
+	if (c==16){
 	system("cls");
 	cout << "Voce chegou ao nivel 2.";
 	do{

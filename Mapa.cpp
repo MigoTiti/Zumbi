@@ -64,26 +64,6 @@ void Mapa2::iniciarMapa(Mapa2 *m2, int humans){
 			mapa[i][j]='H';
 		}
 	}
-	do{
-		i=rand() % 30;
-		j=rand() % 30;
-		if (((i==15) && (j==0)) || (mapa[i][j]=='0') || (mapa[i][j]=='H')){
-			c=1;
-		}else{
-			mapa[i][j]='C';
-			c=0;
-		}
-	}while(c>0);
-	do{
-		i=rand() % 30;
-		j=rand() % 30;
-		if (((i==15) && (j==0)) || (mapa[i][j]=='0') || (mapa[i][j]=='H') || (mapa[i][j] == 'C')){
-			c=1;
-		}else{
-			mapa[i][j]='A';
-			c=0;
-		}
-	}while(c>0);
 }
 
 void Mapa2::exibirMapa(Mapa2 *m2){
@@ -321,18 +301,18 @@ void Mapa2::verificarMapa(Mapa2 *m2, char d, int x, int y, int *l, int *c, Zumbi
 void Mapa1::iniciarMapa(Mapa1 *m1, int humans){
 	int i, j, c;
 	srand (time(NULL));
-	for (i=0;i<=(tam-21);i++){
-		for (j=0;j<=(tam-1);j++){
+	for (i=0;i<=9;i++){
+		for (j=0;j<=29;j++){
 			mapa[i][j]='0';
 		}
 	}
-	for (i=10;i<=(tam-11);i++){
-		for (j=0;j<=(tam-1);j++){
+	for (i=10;i<=19;i++){
+		for (j=0;j<=29;j++){
 			mapa[i][j]='1';
 		}
 	}
-	for (i=20;i<=(tam-1);i++){
-		for (j=0;j<=(tam-1);j++){
+	for (i=20;i<=29;i++){
+		for (j=0;j<=29;j++){
 			mapa[i][j]='0';
 		}
 	}
@@ -366,6 +346,36 @@ void Mapa1::iniciarMapa(Mapa1 *m1, int humans){
 			c=0;
 		}
 	}while(c>0);
+}
+
+void Mapa1::iniciarMapa2(Mapa1* m1, int humans){
+	int i, j, c;
+	srand (time(NULL));
+	for (i=0;i<=29;i++){
+		for (j=0;j<=29;j++){
+			mapa[i][j]='0';
+		}
+	}
+	for (i=10;i<=19;i++){
+		for (j=0;j<=13;j++){
+			mapa[i][j]='1';
+		}
+	}
+	for (i=5;i<=24;i++){
+		for (j=14;j<=25;j++){
+			mapa[i][j]='1';
+		}
+	}
+	mapa[15][0]='Z';
+	for (c=0;c<=(humans-1);c++){
+		i=rand() % 30;
+		j=rand() % 30;
+		if (((i==15) && (j==0)) || (mapa[i][j]=='0')){
+			c--;
+		}else{
+			mapa[i][j]='H';
+		}
+	}
 }
 
 void Mapa1::exibirMapa(Mapa1 *m1){
@@ -404,17 +414,24 @@ void Mapa1::exibirMapa(Mapa1 *m1){
 }
 
 void Mapa1::andarMapa(Mapa1 *m1, char d, Zumbi *z1, int *c){
-	int opt, x, y;
+	int opt, x, y, c2=1;
 	    procurarMapa(m1,&x,&y);
 	    do{
 	    system("cls");
 		verificarMapa(m1,d,x,y,&x,&y,z1,c);
 		exibirMapa(m1);
-		if (*c==8){
+		if (*c==16){
 			d='0';
+		}else{
+		if ((*c==8) && (c2==1)){
+			c2++;
+			iniciarMapa2(m1,8);
+			procurarMapa(m1,&x,&y);	
+			d=getche();
 		}else{
 			d=getche();
 		}
+	    }
 	    }while(d!='0');
 }
 

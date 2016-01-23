@@ -11,6 +11,7 @@ class Mapa1 : public Mapa{
 	public:
 		Mapa1(int);
 		void iniciarMapa(Mapa1*, int);
+		void iniciarMapa2(Mapa1*, int);
 		void exibirMapa(Mapa1*);
         void andarMapa(Mapa1*, char, Zumbi*, int*);
         void verificarMapa(Mapa1*, char, int, int, int*, int*, Zumbi*, int*);
