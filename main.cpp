@@ -8,7 +8,7 @@
 using namespace std;
 
 void escolha2(int opt);
-void escolha(int op, Zumbi z1, Mapa1 *m1, Mapa2 *m2);
+void escolha(int op, Zumbi z1, Mapa *m1);
 int menu();
 
 HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -23,20 +23,18 @@ int main(){
 	z1.setSpeed(1);
 	z1.setHealth(5000);
 	
-    Mapa1 m1(30);
+    Mapa m1(30);
 	m1.iniciarMapa(&m1,8);
-	
-	Mapa2 m2(30);
-	m2.iniciarMapa(&m2,8);
+
 	
 	int op;
 	do{
 	op=menu();
-	escolha(op,z1,&m1,&m2);
+	escolha(op,z1,&m1);
     }while(op!=3);
 }	
 
-void escolha(int op, Zumbi z1, Mapa1 *m1, Mapa2 *m2){
+void escolha(int op, Zumbi z1, Mapa *m1){
 	int opt, i, j, c=0;
 	char d;
 	switch(op){
@@ -59,14 +57,6 @@ void escolha(int op, Zumbi z1, Mapa1 *m1, Mapa2 *m2){
 			break;
 		default:
 			cout << "Comando invalido";
-	}
-	if (c==16){
-	system("cls");
-	cout << "Voce chegou ao nivel 2.";
-	do{
-	    cin.get();
-	}while(cin.get()!='\n');
-	m2->andarMapa(m2,d,&z1);
 	}
 }
 
