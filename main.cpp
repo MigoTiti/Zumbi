@@ -1,13 +1,10 @@
 #include <iostream>
 #include <conio.h>
 #include <windows.h>
-#include <random>
-#include <ctime>
 #include "Mapa.h"
 
 using namespace std;
 
-void escolha2(int opt);
 void escolha(int op, Zumbi z1, Mapa *m1);
 int menu();
 
@@ -16,17 +13,17 @@ HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE);
 int main(){
 	SetConsoleTextAttribute(console,15);
 	cout << "Digite o nome do zumbi: ";
-	string nome1;
-	cin >> nome1;
+	string nome;
+	cin >> nome;
 	
-	Zumbi z1(nome1);
+	Zumbi z1(nome);
 	z1.setSpeed(1);
 	z1.setHealth(5000);
+    z1.setStrength(300);
 	
     Mapa m1(30);
-	m1.iniciarMapa(&m1,8);
+	m1.iniciarMapa(&m1);
 
-	
 	int op;
 	do{
 	op=menu();
@@ -35,22 +32,24 @@ int main(){
 }	
 
 void escolha(int op, Zumbi z1, Mapa *m1){
-	int opt, i, j, c=0;
+	int opt;
 	char d;
 	switch(op){
 		case 1:
 			system("cls");
 			m1->exibirMapa(m1);
 			cout << "\nDeseja voltar ao menu? (s=1/n=0): ";
-			cin >> opt;
-			escolha2(opt);
+			opt=getche();
+	        system("cls");
+            if (opt==0)
+              exit(0);
 			break;
 		case 2:
 			system("cls");
 			m1->exibirMapa(m1);
 			cout << "\nUse o numpad para andar: ";
 			d=getche();
-			m1->andarMapa(m1,d,&z1,&c);
+			m1->andarMapa(m1,d,&z1);
 			break;
 		case 3:
 			exit(0);
@@ -58,14 +57,6 @@ void escolha(int op, Zumbi z1, Mapa *m1){
 		default:
 			cout << "Comando invalido";
 	}
-}
-
-void escolha2(int opt){
-	system("cls");
-    if (opt==0)
-     exit(0);
-    else
-     system("cls");
 }
 
 int menu(){

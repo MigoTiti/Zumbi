@@ -5,11 +5,13 @@
 #include <ctime>
 #include <iostream>
 
+#define humanos 8
+
 Mapa::Mapa(int tamanho){
 	tam=tamanho;
 }
 
-void Mapa::iniciarMapa(Mapa *m1, int humans){
+void Mapa::iniciarMapa(Mapa *m1){
 	int i, j, c;
 	srand (time(NULL));
 	for (i=0;i<=9;i++){
@@ -28,7 +30,7 @@ void Mapa::iniciarMapa(Mapa *m1, int humans){
 		}
 	}
 	mapa[15][0]='Z';
-	for (c=0;c<=(humans-1);c++){
+	for (c=0;c<=(humanos-1);c++){
 		i=rand() % 30;
 		j=rand() % 30;
 		if (((i==15) && (j==0)) || (mapa[i][j]=='0')){
@@ -59,7 +61,7 @@ void Mapa::iniciarMapa(Mapa *m1, int humans){
 	}while(c>0);
 }
 
-void Mapa::iniciarMapa2(Mapa* m1, int humans){
+void Mapa::iniciarMapa2(Mapa* m1){
 	int i, j, c;
 	srand (time(NULL));
 	for (i=0;i<=29;i++){
@@ -78,7 +80,7 @@ void Mapa::iniciarMapa2(Mapa* m1, int humans){
 		}
 	}
 	mapa[15][0]='Z';
-	for (c=0;c<=(humans-1);c++){
+	for (c=0;c<=(humanos-1);c++){
 		i=rand() % 30;
 		j=rand() % 30;
 		if (((i==15) && (j==0)) || (mapa[i][j]=='0')){
@@ -89,7 +91,7 @@ void Mapa::iniciarMapa2(Mapa* m1, int humans){
 	}
 }
 
-void Mapa::iniciarMapa3(Mapa *m1, int humans){
+void Mapa::iniciarMapa3(Mapa *m1){
 	int i, j, c;
 	srand (time(NULL));
 	for (i=0;i<=29;i++){
@@ -127,7 +129,7 @@ void Mapa::iniciarMapa3(Mapa *m1, int humans){
 		mapa[i][29]='0';
 	}
 	mapa[15][0]='Z';
-	for (c=0;c<=(humans-1);c++){
+	for (c=0;c<=(humanos-1);c++){
 		i=rand() % 30;
 		j=rand() % 30;
 		if (((i==15) && (j==0)) || (mapa[i][j]=='0')){
@@ -171,21 +173,21 @@ void Mapa::exibirMapa(Mapa *m1){
 	}
 }
 
-void Mapa::andarMapa(Mapa *m1, char d, Zumbi *z1, int *c){
-	int opt, x, y, c2=1;
+void Mapa::andarMapa(Mapa *m1, char d, Zumbi *z1){
+	int x, y, c2=1, c=0;
 	    procurarMapa(m1,&x,&y);
 	    do{
 	    system("cls");
-		verificarMapa(m1,d,x,y,&x,&y,z1,c);
+		verificarMapa(m1,d,x,y,&x,&y,z1,&c);
 		exibirMapa(m1);
-		if ((*c==8) && (c2==1)){
+		if ((c==humanos) && (c2==1)){
 			c2++;
-			iniciarMapa2(m1,8);
+			iniciarMapa2(m1);
 			procurarMapa(m1,&x,&y);	
 			d=getche();
-		}else if ((*c==16) && (c2==2)){
+		}else if ((c==(humanos*2)) && (c2==2)){
 			c2++;
-			iniciarMapa3(m1,8);
+			iniciarMapa3(m1);
 			procurarMapa(m1,&x,&y);				
 			d=getche();
 		}else{
@@ -207,7 +209,7 @@ void Mapa::procurarMapa(Mapa *m1, int *l, int *c){
 }
 
 void Mapa::verificarMapa(Mapa *m1, char d, int x, int y, int *l, int *c, Zumbi *z1, int *c1){
-	int i, j, v, opt;    
+	int v;    
 	switch(d){
 		case '1':
 			if(mapa[x+1][y-1]=='1'){

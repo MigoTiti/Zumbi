@@ -8,8 +8,10 @@ class Zumbi{
 		void setName(string);
 		void setSpeed(int);
 		void setHealth(float);
+        void setStrength(int);
 		string getName();
 		int getSpeed();
+        int getStrength();
 		float getHealth();
 		int atacarHumano();
 		void pegarItem(char,Zumbi *);
@@ -19,7 +21,7 @@ class Zumbi{
 		int getC();
 	private:
 		string nome;
-		int velocidade;
+		int velocidade, strength;
 		float hp;
-		int c=0, a=0; // Armadura/capacete
+		bool capacete=false, armadura=false;
 };
