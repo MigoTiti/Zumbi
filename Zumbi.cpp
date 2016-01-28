@@ -6,16 +6,33 @@
 
 #define vh 4000
 
-Zumbi::Zumbi(string name){
-	nome=name;
+Zumbi::Zumbi(){
+	this->nome="N sei oq coloco aqui";
+    this->hp=5000;
+    this->armadura=false;
+    this->capacete=false;
+    this->strength=300;   
 }
 
-int Zumbi::getA(){
-    return armadura;
+Zumbi::Zumbi(const string &name){
+	this->nome=name;
+    this->hp=5000;
+    this->armadura=false;
+    this->capacete=false;
+    this->strength=300;
 }
 
-int Zumbi::getC(){
-	return capacete;
+void Zumbi::exibirStatus(){
+    cout << "Pontos de vida: " << hp;
+    cout << "\nForca: " << strength;
+    if (armadura)
+        cout << "\nPossui armadura.";
+    else
+        cout << "\nNao possui armadura";
+    if (capacete)
+        cout << "\nPossui capacete.";
+    else
+        cout << "\nNao possui capacete";        
 }
 
 void Zumbi::setA(){
@@ -29,22 +46,17 @@ void Zumbi::setC(){
 }
 
 void Zumbi::setName(string name){
-	nome=name;
+	this->nome=name;
 }
 
 void Zumbi::setHealth(float x){
 	if (x>=0)
-	hp=x;
+	this->hp=x;
 }
 
 void Zumbi::setStrength(int s){
     if (s>0)
     strength=s;
-}
-
-void Zumbi::setSpeed(int s){
-	if (s>0)
-	velocidade=s;
 }
 
 float Zumbi::getHealth(){
@@ -55,15 +67,11 @@ string Zumbi::getName(){
 	return nome;
 }
 
-int Zumbi::getSpeed(){
-	return velocidade;
-}
-
 int Zumbi::getStrength(){
 	return strength;
 }
 
-void Zumbi::pegarItem(char item, Zumbi *z1){
+void Zumbi::pegarItem(char item){
 	switch(item){
 		case 'C':
 			cout << "Voce pegou um capacete, +200 de vida.";

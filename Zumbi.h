@@ -3,8 +3,9 @@
 using namespace std;
 
 class Zumbi{
-	public:
-		Zumbi(string);
+    public:
+        Zumbi();
+		Zumbi(const string &);
 		void setName(string);
 		void setSpeed(int);
 		void setHealth(float);
@@ -13,15 +14,14 @@ class Zumbi{
 		int getSpeed();
         int getStrength();
 		float getHealth();
-		int atacarHumano();
-		void pegarItem(char,Zumbi *);
 		void setC();
 		void setA();
-		int getA();
-		int getC();
+		int atacarHumano();
+		void pegarItem(char);
+        void exibirStatus();        
 	private:
 		string nome;
-		int velocidade, strength;
+		int strength;
 		float hp;
-		bool capacete=false, armadura=false;
+		bool capacete, armadura;
 };

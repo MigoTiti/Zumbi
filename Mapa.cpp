@@ -8,10 +8,10 @@
 #define humanos 8
 
 Mapa::Mapa(int tamanho){
-	tam=tamanho;
+	this->tam=tamanho;
 }
 
-void Mapa::iniciarMapa(Mapa *m1){
+void Mapa::iniciarMapa(){
 	int i, j, c;
 	srand (time(NULL));
 	for (i=0;i<=9;i++){
@@ -61,7 +61,7 @@ void Mapa::iniciarMapa(Mapa *m1){
 	}while(c>0);
 }
 
-void Mapa::iniciarMapa2(Mapa* m1){
+void Mapa::iniciarMapa2(){
 	int i, j, c;
 	srand (time(NULL));
 	for (i=0;i<=29;i++){
@@ -91,7 +91,7 @@ void Mapa::iniciarMapa2(Mapa* m1){
 	}
 }
 
-void Mapa::iniciarMapa3(Mapa *m1){
+void Mapa::iniciarMapa3(){
 	int i, j, c;
 	srand (time(NULL));
 	for (i=0;i<=29;i++){
@@ -140,7 +140,7 @@ void Mapa::iniciarMapa3(Mapa *m1){
 	}
 }
 
-void Mapa::exibirMapa(Mapa *m1){
+void Mapa::exibirMapa(){
 	int i, j;
 	HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE);
 	for (i=0;i<=(tam-1);i++){
@@ -148,47 +148,44 @@ void Mapa::exibirMapa(Mapa *m1){
 			if(mapa[i][j]=='Z'){
 				SetConsoleTextAttribute(console,12);
 				cout << " " << mapa[i][j];
-				SetConsoleTextAttribute(console,15);
 			}else if (mapa[i][j]=='H'){
+                SetConsoleTextAttribute(console,15);
 				cout << " " << mapa[i][j];
 			}else if (mapa[i][j]=='0'){
 				SetConsoleTextAttribute(console,17);
 				cout << " " << mapa[i][j];
-				SetConsoleTextAttribute(console,15);
 			}else if (mapa[i][j]=='A'){
 				SetConsoleTextAttribute(console,14);
 				cout << " " << mapa[i][j];
-				SetConsoleTextAttribute(console,15);
 			}else if (mapa[i][j]=='C'){
 			    SetConsoleTextAttribute(console,14);
 				cout << " " << mapa[i][j];
-				SetConsoleTextAttribute(console,15);
 			}else{
 				SetConsoleTextAttribute(console,0);
 				cout << " " << mapa[i][j];
-				SetConsoleTextAttribute(console,15);
 			}
+            SetConsoleTextAttribute(console,15);
 		}
 		cout << "\n";
 	}
 }
 
-void Mapa::andarMapa(Mapa *m1, char d, Zumbi *z1){
-	int x, y, c2=1, c=0;
-	    procurarMapa(m1,&x,&y);
+void Mapa::andarMapa(char d, Zumbi *z1, int *c){
+	int x, y, cfases=1;
+	    procurarMapa(&x,&y);
 	    do{
 	    system("cls");
-		verificarMapa(m1,d,x,y,&x,&y,z1,&c);
-		exibirMapa(m1);
-		if ((c==humanos) && (c2==1)){
-			c2++;
-			iniciarMapa2(m1);
-			procurarMapa(m1,&x,&y);	
+		verificarMapa(d,x,y,&x,&y,z1,c);
+		exibirMapa();
+		if ((*c==humanos) && (cfases==1)){
+			cfases++;
+			iniciarMapa2();
+			procurarMapa(&x,&y);	
 			d=getche();
-		}else if ((c==(humanos*2)) && (c2==2)){
-			c2++;
-			iniciarMapa3(m1);
-			procurarMapa(m1,&x,&y);				
+		}else if ((*c==(humanos*2)) && (cfases==2)){
+			cfases++;
+			iniciarMapa3();
+			procurarMapa(&x,&y);				
 			d=getche();
 		}else{
 			d=getche();
@@ -196,7 +193,7 @@ void Mapa::andarMapa(Mapa *m1, char d, Zumbi *z1){
 	    }while(d!='0');
 }
 
-void Mapa::procurarMapa(Mapa *m1, int *l, int *c){
+void Mapa::procurarMapa(int *l, int *c){
 	int i, j;
 	for (i=0;i<=(tam-1);i++){
 		for (j=0;j<=(tam-1);j++){
@@ -208,7 +205,7 @@ void Mapa::procurarMapa(Mapa *m1, int *l, int *c){
 	}
 }
 
-void Mapa::verificarMapa(Mapa *m1, char d, int x, int y, int *l, int *c, Zumbi *z1, int *c1){
+void Mapa::verificarMapa(char d, int x, int y, int *l, int *c, Zumbi *z1, int *c1){
 	int v;    
 	switch(d){
 		case '1':
@@ -228,7 +225,7 @@ void Mapa::verificarMapa(Mapa *m1, char d, int x, int y, int *l, int *c, Zumbi *
 			    exit(0);
                 }
 			}else if((mapa[x+1][y-1]=='A') || (mapa[x+1][y-1]=='C')){
-				z1->pegarItem(mapa[x+1][y-1],z1);
+				z1->pegarItem(mapa[x+1][y-1]);
 				mapa[x+1][y-1]='1';
 			}
 		    break;
@@ -250,7 +247,7 @@ void Mapa::verificarMapa(Mapa *m1, char d, int x, int y, int *l, int *c, Zumbi *
 			    exit(0);
                 }
 		    }else if((mapa[x+1][y]=='A') || (mapa[x+1][y]=='C')){
-				z1->pegarItem(mapa[x+1][y],z1);
+				z1->pegarItem(mapa[x+1][y]);
 				mapa[x+1][y]='1';
 			}
 		    break;
@@ -271,7 +268,7 @@ void Mapa::verificarMapa(Mapa *m1, char d, int x, int y, int *l, int *c, Zumbi *
 			    exit(0);
                 }
 		    }else if((mapa[x+1][y+1]=='A') || (mapa[x+1][y+1]=='C')){
-				z1->pegarItem(mapa[x+1][y+1],z1);
+				z1->pegarItem(mapa[x+1][y+1]);
 				mapa[x+1][y+1]='1';
 			}
 		    break;
@@ -293,7 +290,7 @@ void Mapa::verificarMapa(Mapa *m1, char d, int x, int y, int *l, int *c, Zumbi *
 			    exit(0);
                 }
 		    }else if((mapa[x][y-1]=='A') || (mapa[x][y-1]=='C')){
-				z1->pegarItem(mapa[x][y-1],z1);
+				z1->pegarItem(mapa[x][y-1]);
 				mapa[x][y-1]='1';
 			}
 		    break;
@@ -315,7 +312,7 @@ void Mapa::verificarMapa(Mapa *m1, char d, int x, int y, int *l, int *c, Zumbi *
 			    exit(0);
                 }
 		    }else if((mapa[x][y+1]=='A') || (mapa[x][y+1]=='C')){
-				z1->pegarItem(mapa[x][y+1],z1);
+				z1->pegarItem(mapa[x][y+1]);
 				mapa[x][y+1]='1';
 			}
 		    break;
@@ -336,7 +333,7 @@ void Mapa::verificarMapa(Mapa *m1, char d, int x, int y, int *l, int *c, Zumbi *
 			    exit(0);
                 }
 		    }else if((mapa[x-1][y-1]=='A') || (mapa[x-1][y-1]=='C')){
-				z1->pegarItem(mapa[x-1][y-1],z1);
+				z1->pegarItem(mapa[x-1][y-1]);
 				mapa[x-1][y-1]='1';
 			}
 		    break;
@@ -358,7 +355,7 @@ void Mapa::verificarMapa(Mapa *m1, char d, int x, int y, int *l, int *c, Zumbi *
 			    exit(0);
                 }
 		    }else if((mapa[x-1][y]=='A') || (mapa[x-1][y]=='C')){
-				z1->pegarItem(mapa[x-1][y],z1);
+				z1->pegarItem(mapa[x-1][y]);
                 mapa[x-1][y]='1';
 			}
 		    break;
@@ -379,7 +376,7 @@ void Mapa::verificarMapa(Mapa *m1, char d, int x, int y, int *l, int *c, Zumbi *
 			    exit(0);
 			    }
 		    }else if((mapa[x-1][y+1]=='A') || (mapa[x-1][y+1]=='C')){
-				z1->pegarItem(mapa[x-1][y+1],z1);
+				z1->pegarItem(mapa[x-1][y+1]);
 				mapa[x-1][y+1]='1';
 			}
 		    break;

@@ -5,7 +5,7 @@
 
 using namespace std;
 
-void escolha(int op, Zumbi z1, Mapa *m1);
+void escolha(int op, Zumbi *z1, Mapa *m1);
 int menu();
 
 HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -17,41 +17,47 @@ int main(){
 	cin >> nome;
 	
 	Zumbi z1(nome);
-	z1.setSpeed(1);
-	z1.setHealth(5000);
-    z1.setStrength(300);
 	
     Mapa m1(30);
-	m1.iniciarMapa(&m1);
+	m1.iniciarMapa();
 
 	int op;
 	do{
 	op=menu();
-	escolha(op,z1,&m1);
-    }while(op!=3);
+	escolha(op,&z1,&m1);
+    }while(op!=4);
 }	
 
-void escolha(int op, Zumbi z1, Mapa *m1){
-	int opt;
-	char d;
+void escolha(int op, Zumbi *z1, Mapa *m1){
+	int c=0;
+	char d, opt;
 	switch(op){
 		case 1:
 			system("cls");
-			m1->exibirMapa(m1);
+			m1->exibirMapa();
 			cout << "\nDeseja voltar ao menu? (s=1/n=0): ";
 			opt=getche();
 	        system("cls");
-            if (opt==0)
+            if (opt=='0')
               exit(0);
 			break;
 		case 2:
 			system("cls");
-			m1->exibirMapa(m1);
+			m1->exibirMapa();
 			cout << "\nUse o numpad para andar: ";
 			d=getche();
-			m1->andarMapa(m1,d,&z1);
+			m1->andarMapa(d,z1,&c);
 			break;
 		case 3:
+            system("cls");
+            z1->exibirStatus();
+			cout << "\n\n\nDeseja voltar ao menu? (s=1/n=0): ";
+			opt=getche();
+	        system("cls");
+            if (opt=='0')
+              exit(0);
+			break;
+        case 4:
 			exit(0);
 			break;
 		default:
@@ -62,10 +68,11 @@ void escolha(int op, Zumbi z1, Mapa *m1){
 int menu(){
 	int op;
 	system("cls");
-	cout << "Escoha uma opcao:\n\n";
+	cout << "Escolha uma opcao:\n\n";
 	cout << "1-Ver mapa; \n";
 	cout << "2-Andar; \n";
-	cout << "3-Sair. \n\n";
+    cout << "3-Exibir status; \n";
+	cout << "4-Sair. \n\n";
 	cin >> op;
 	return op;
 }
