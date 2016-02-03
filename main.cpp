@@ -5,7 +5,7 @@
 
 using namespace std;
 
-void escolha(int op, Zumbi *z1, Mapa *m1);
+void escolha(int op, Zumbi *const z1, Mapa *const m1);
 int menu();
 
 HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -28,7 +28,7 @@ int main(){
     }while(op!=4);
 }	
 
-void escolha(int op, Zumbi *z1, Mapa *m1){
+void escolha(int op, Zumbi *const z1, Mapa *const m1){
 	int c=0;
 	char d, opt;
 	switch(op){

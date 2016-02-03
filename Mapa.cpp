@@ -169,7 +169,7 @@ void Mapa::exibirMapa() const{
 	}
 }
 
-void Mapa::andarMapa(char d, Zumbi *z1, int *c){
+void Mapa::andarMapa(char d, Zumbi *const z1, int *c){
 	int x, y, cfases=1;
 	    procurarMapa(&x,&y);
 	    do{
@@ -204,7 +204,7 @@ void Mapa::procurarMapa(int *l, int *c){
 	}
 }
 
-void Mapa::verificarMapa(char d, int x, int y, int *l, int *c, Zumbi *z1, int *c1){
+void Mapa::verificarMapa(char d, int x, int y, int *l, int *c, Zumbi *const z1, int *c1){
 	int v;    
 	switch(d){
 		case '1':
