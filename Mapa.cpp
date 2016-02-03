@@ -5,7 +5,7 @@
 #include <ctime>
 #include <iostream>
 
-#define humanos 8
+const int Mapa::humanos=8;
 
 Mapa::Mapa(){
 }

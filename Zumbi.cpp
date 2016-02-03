@@ -14,6 +14,14 @@ Zumbi::Zumbi(){
     this->strength=300;   
 }
 
+Zumbi::Zumbi(const Zumbi &z1){
+	nome=z1.nome;
+	hp=z1.hp;
+	armadura=z1.armadura;
+	capacete=z1.capacete;
+	strength=z1.strength;
+}
+
 Zumbi::Zumbi(const string &name){
 	this->nome=name;
     this->hp=5000;

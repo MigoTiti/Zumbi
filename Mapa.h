@@ -10,6 +10,7 @@ class Mapa{
         void procurarMapa(int *, int *); 
 		void iniciarMapa2();
 		void iniciarMapa3();
-		char mapa[30][30];	
+		char mapa[30][30];
+        static const int humanos;
 };
 
