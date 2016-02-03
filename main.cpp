@@ -18,7 +18,7 @@ int main(){
 	
 	Zumbi z1(nome);
 	
-    Mapa m1(30);
+    Mapa m1;
 	m1.iniciarMapa();
 
 	int op;

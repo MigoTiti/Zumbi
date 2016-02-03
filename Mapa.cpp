@@ -7,8 +7,7 @@
 
 #define humanos 8
 
-Mapa::Mapa(int tamanho){
-	this->tam=tamanho;
+Mapa::Mapa(){
 }
 
 void Mapa::iniciarMapa(){
@@ -140,11 +139,11 @@ void Mapa::iniciarMapa3(){
 	}
 }
 
-void Mapa::exibirMapa(){
+void Mapa::exibirMapa() const{
 	int i, j;
 	HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE);
-	for (i=0;i<=(tam-1);i++){
-		for (j=0;j<=(tam-1);j++){
+	for (i=0;i<=29;i++){
+		for (j=0;j<=29;j++){
 			if(mapa[i][j]=='Z'){
 				SetConsoleTextAttribute(console,12);
 				cout << " " << mapa[i][j];
@@ -195,8 +194,8 @@ void Mapa::andarMapa(char d, Zumbi *z1, int *c){
 
 void Mapa::procurarMapa(int *l, int *c){
 	int i, j;
-	for (i=0;i<=(tam-1);i++){
-		for (j=0;j<=(tam-1);j++){
+	for (i=0;i<=29;i++){
+		for (j=0;j<=29;j++){
 			if(mapa[i][j]=='Z'){
 				*l=i;
 				*c=j;

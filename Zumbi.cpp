@@ -7,7 +7,7 @@
 #define vh 4000
 
 Zumbi::Zumbi(){
-	this->nome="N sei oq coloco aqui";
+	this->nome="Sem nome";
     this->hp=5000;
     this->armadura=false;
     this->capacete=false;
@@ -22,7 +22,7 @@ Zumbi::Zumbi(const string &name){
     this->strength=300;
 }
 
-void Zumbi::exibirStatus(){
+void Zumbi::exibirStatus() const{
     cout << "Pontos de vida: " << hp;
     cout << "\nForca: " << strength;
     if (armadura)
@@ -43,32 +43,6 @@ void Zumbi::setA(){
 void Zumbi::setC(){
 	capacete=true;
     hp=hp+200;
-}
-
-void Zumbi::setName(string name){
-	this->nome=name;
-}
-
-void Zumbi::setHealth(float x){
-	if (x>=0)
-	this->hp=x;
-}
-
-void Zumbi::setStrength(int s){
-    if (s>0)
-    strength=s;
-}
-
-float Zumbi::getHealth(){
-	return hp;
-}
-
-string Zumbi::getName(){
-	return nome;
-}
-
-int Zumbi::getStrength(){
-	return strength;
 }
 
 void Zumbi::pegarItem(char item){
@@ -93,16 +67,13 @@ void Zumbi::pegarItem(char item){
 }
 
 int Zumbi::atacarHumano(){
-	int VidaH=vh, Sh=200, Sz, maismenos, atk, total;
-	float hp;
+	int VidaH=vh, VidaZ=hp, Sh=200, Sz=strength, maismenos, atk, total;
 	char opt;
 	srand(time(NULL));
-	hp=getHealth();
-    Sz=getStrength();
 	do{
 		system("cls");
 		cout << "HP humano: " << VidaH << "    ";
-		cout << "HP " << getName() << ": " << hp;
+		cout << "HP " << nome << ": " << VidaZ;
 		cout << "\n1- Ataque normal;";
 		cout << "\n2- Mordida (custa pontos de vida);";
         cout << "\n3- Fugir; \n\n";
@@ -119,15 +90,15 @@ int Zumbi::atacarHumano(){
 					VidaH=VidaH-total;
 				}
 				system("cls");
-				cout << getName() << " usou Ataque normal, causando " << total << " de dano.";
+				cout << nome << " usou Ataque normal, causando " << total << " de dano.";
 				do{
 				cin.get();
 			    }while(cin.get()!='\n');
 				break;
 			case '2':
-				hp=hp-200;
-                if (hp<0){
-                    hp=0;
+				VidaZ=VidaZ-200;
+                if (VidaZ<0){
+                    VidaZ=0;
                 }                
 				maismenos=rand() % 2;
 				atk=rand() % 201;
@@ -139,7 +110,7 @@ int Zumbi::atacarHumano(){
 					VidaH=VidaH-total;
 				}
 				system("cls");
-				cout << getName() << " usou Mordida, causando " << total << " de dano e recebendo 200 de dano colateral";
+				cout << nome << " usou Mordida, causando " << total << " de dano e recebendo 200 de dano colateral";
 				do{
 				cin.get();
 			    }while(cin.get()!='\n');
@@ -152,23 +123,23 @@ int Zumbi::atacarHumano(){
 				atk=rand() % 101;
 				if (maismenos==1){
 					total=Sh+atk;
-					hp=hp-total;
-					if (hp<0){
-						hp=0;
+					VidaZ=VidaZ-total;
+					if (VidaZ<0){
+						VidaZ=0;
 					}
 				}else{
 					total=Sh-atk;
-					hp=hp-total;
-					if (hp<0){
-						hp=0;
+					VidaZ=VidaZ-total;
+					if (VidaZ<0){
+						VidaZ=0;
 					}
 				}
 				cout << "Humano usou Ataque normal, causando " << total << " de dano.";
 				do{
 				cin.get();
 			    }while(cin.get()!='\n');
-	}while((hp>0) && (VidaH>0));
-	if (hp==0){
+	}while((VidaZ>0) && (VidaH>0));
+	if (VidaZ==0){
     system("cls");
 	return 0;
 	}else{
