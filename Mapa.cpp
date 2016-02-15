@@ -8,6 +8,13 @@
 const int Mapa::humanos=8;
 
 Mapa::Mapa(){
+    this.data.dia = 21;
+    this.data.mes = 04;
+    this.data.ano = 2016;
+}
+
+void Mapa::exibirDia(){
+    cout << "O dia atual e: " << data.imprimir();
 }
 
 void Mapa::iniciarMapa(){
