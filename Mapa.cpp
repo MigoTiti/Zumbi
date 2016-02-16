@@ -6,15 +6,23 @@
 #include <iostream>
 
 const int Mapa::humanos=8;
+int Mapa::humanosVivos=humanos;
 
-Mapa::Mapa(){
-    this.data.dia = 21;
-    this.data.mes = 04;
-    this.data.ano = 2016;
+Mapa::Mapa():data(16,02,2016){
 }
 
-void Mapa::exibirDia(){
-    cout << "O dia atual e: " << data.imprimir();
+void Mapa::exibirHumanos(){
+    system("cls");
+    cout << humanosVivos << " estao vivos.";
+}
+
+void Mapa::exibirDia() const{
+    cout << "O dia atual e: ";
+    data.imprimir();
+}
+
+void Mapa::avancarDia(){
+    data.incrementarDia();
 }
 
 void Mapa::iniciarMapa(){
@@ -95,6 +103,7 @@ void Mapa::iniciarMapa2(){
 			mapa[i][j]='H';
 		}
 	}
+    humanosVivos = humanos;
 }
 
 void Mapa::iniciarMapa3(){
@@ -144,6 +153,7 @@ void Mapa::iniciarMapa3(){
 			mapa[i][j]='H';
 		}
 	}
+    humanosVivos = humanos;
 }
 
 void Mapa::exibirMapa() const{
@@ -224,6 +234,7 @@ void Mapa::verificarMapa(char d, int x, int y, int *l, int *c, Zumbi *const z1, 
 				v=z1->atacarHumano();
 				if (v==1){
 				*c1=*c1+1;
+                humanosVivos--;
 			    mapa[x+1][y-1]='Z';
 			    }else if (v==0){
 			    cout << "Voce perdeu. Aperte qualquer botao para sair: ";
@@ -246,6 +257,7 @@ void Mapa::verificarMapa(char d, int x, int y, int *l, int *c, Zumbi *const z1, 
 				v=z1->atacarHumano();
 				if (v==1){
 				*c1=*c1+1;
+                humanosVivos--;
 			    mapa[x+1][y]='Z';
 			    }else if (v==0){
 			    cout << "Voce perdeu. Aperte qualquer botao para sair: ";
@@ -267,6 +279,7 @@ void Mapa::verificarMapa(char d, int x, int y, int *l, int *c, Zumbi *const z1, 
 				v=z1->atacarHumano();
 				if (v==1){
 				*c1=*c1+1;
+                humanosVivos--;
 			    mapa[x+1][y+1]='Z';
 			    }else if (v==0){
 			    cout << "Voce perdeu. Aperte qualquer botao para sair: ";
@@ -289,6 +302,7 @@ void Mapa::verificarMapa(char d, int x, int y, int *l, int *c, Zumbi *const z1, 
 				v=z1->atacarHumano();
 				if (v==1){
 				*c1=*c1+1;
+                humanosVivos--;
 			    mapa[x][y-1]='Z';
 			    }else if (v==0){
 			    cout << "Voce perdeu. Aperte qualquer botao para sair: ";
@@ -311,6 +325,7 @@ void Mapa::verificarMapa(char d, int x, int y, int *l, int *c, Zumbi *const z1, 
 				v=z1->atacarHumano();
 				if (v==1){
 				*c1=*c1+1;
+                humanosVivos--;
 			    mapa[x][y+1]='Z';
 			    }else if (v==0){
 			    cout << "Voce perdeu. Aperte qualquer botao para sair: ";
@@ -332,6 +347,7 @@ void Mapa::verificarMapa(char d, int x, int y, int *l, int *c, Zumbi *const z1, 
 				v=z1->atacarHumano();
 				if (v==1){
 				*c1=*c1+1;
+                humanosVivos--;
 			    mapa[x-1][y-1]='Z';
 			    }else if (v==0){
 			    cout << "Voce perdeu. Aperte qualquer botao para sair: ";
@@ -354,6 +370,7 @@ void Mapa::verificarMapa(char d, int x, int y, int *l, int *c, Zumbi *const z1, 
 				v=z1->atacarHumano();
 				if (v==1){
 				*c1=*c1+1;
+                humanosVivos--;
 			    mapa[x-1][y]='Z';
 			    }else if (v==0){
 			    cout << "Voce perdeu. Aperte qualquer botao para sair: ";
@@ -375,6 +392,7 @@ void Mapa::verificarMapa(char d, int x, int y, int *l, int *c, Zumbi *const z1, 
 				v=z1->atacarHumano();
 				if (v==1){
 				*c1=*c1+1;
+                humanosVivos--;
 			    mapa[x-1][y+1]='Z';
 			    }else if (v==0){
 			    cout << "Voce perdeu. Aperte qualquer botao para sair: ";

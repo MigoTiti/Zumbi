@@ -5,8 +5,8 @@
 
 using namespace std;
 
-void escolha(int op, Zumbi *const z1, Mapa *const m1);
-int menu();
+void escolha(char op, int *c, Zumbi *const z1, Mapa *const m1);
+char menu();
 
 HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE);
 
@@ -21,18 +21,19 @@ int main(){
     Mapa m1;
 	m1.iniciarMapa();
 
-	int op;
+	int c=0;
+	char op;
 	do{
 	op=menu();
-	escolha(op,&z1,&m1);
-    }while(op!=4);
+	escolha(op,&c,&z1,&m1);
+    }while(op!=666);
 }	
 
-void escolha(int op, Zumbi *const z1, Mapa *const m1){
-	int c=0;
+void escolha(char op, int *c, Zumbi *const z1, Mapa *const m1){
 	char d, opt;
+    system("cls");
 	switch(op){
-		case 1:
+		case '1':
 			system("cls");
 			m1->exibirMapa();
 			cout << "\nDeseja voltar ao menu? (s=1/n=0): ";
@@ -41,14 +42,14 @@ void escolha(int op, Zumbi *const z1, Mapa *const m1){
             if (opt=='0')
               exit(0);
 			break;
-		case 2:
+		case '2':
 			system("cls");
 			m1->exibirMapa();
 			cout << "\nUse o numpad para andar: ";
 			d=getche();
-			m1->andarMapa(d,z1,&c);
+			m1->andarMapa(d,z1,c);
 			break;
-		case 3:
+		case '3':
             system("cls");
             z1->exibirStatus();
 			cout << "\n\n\nDeseja voltar ao menu? (s=1/n=0): ";
@@ -57,7 +58,25 @@ void escolha(int op, Zumbi *const z1, Mapa *const m1){
             if (opt=='0')
               exit(0);
 			break;
-        case 4:
+        case '4':
+			m1->exibirDia();
+			cout << "\nDeseja voltar ao menu? (s=1/n=0): ";
+			opt=getche();
+            m1->avancarDia();
+	        system("cls");
+            if (opt=='0')
+              exit(0);
+			break;
+        case '5':
+            system("cls");
+			m1->exibirHumanos();
+			cout << "\nDeseja voltar ao menu? (s=1/n=0): ";
+			opt=getche();
+	        system("cls");
+            if (opt=='0')
+              exit(0);
+			break;
+        case '6':
 			exit(0);
 			break;
 		default:
@@ -65,14 +84,16 @@ void escolha(int op, Zumbi *const z1, Mapa *const m1){
 	}
 }
 
-int menu(){
-	int op;
+char menu(){
+	char op;
 	system("cls");
 	cout << "Escolha uma opcao:\n\n";
 	cout << "1-Ver mapa; \n";
 	cout << "2-Andar; \n";
     cout << "3-Exibir status; \n";
-	cout << "4-Sair. \n\n";
-	cin >> op;
+	cout << "4-Exibir dia; \n";
+    cout << "5-Exibir o numero de sobreviventes; \n";
+	cout << "6-Sair. \n\n";
+	op=getche();
 	return op;
 }
