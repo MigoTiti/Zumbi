@@ -18,6 +18,6 @@ class Mapa{
 		char mapa[30][30];
         static const int humanos;
         static int humanosVivos;
-        Data data;
+        Data dataAtual;
 };
 

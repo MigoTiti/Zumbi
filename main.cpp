@@ -19,6 +19,7 @@ int main(){
 	Zumbi z1(nome);
 	
     Mapa m1;
+    
 	m1.iniciarMapa();
 
 	int c=0;
@@ -69,7 +70,7 @@ void escolha(char op, int *c, Zumbi *const z1, Mapa *const m1){
 			break;
         case '5':
             system("cls");
-			m1->exibirHumanos();
+			Mapa::exibirHumanos();
 			cout << "\nDeseja voltar ao menu? (s=1/n=0): ";
 			opt=getche();
 	        system("cls");
