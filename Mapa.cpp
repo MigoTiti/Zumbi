@@ -8,7 +8,7 @@
 const int Mapa::humanos=8;
 int Mapa::humanosVivos=humanos;
 
-Mapa::Mapa():dataAtual(16,02,2016){
+Mapa::Mapa():dataAtual(16,02,2016),chefeFinal(){
 }
 
 void Mapa::exibirHumanos(){
@@ -23,6 +23,14 @@ void Mapa::exibirDia() const{
 
 void Mapa::avancarDia(){
     dataAtual.incrementarDia();
+}
+
+int Mapa::getVidaChefe(){
+	return chefeFinal.getVida();
+}
+
+int Mapa::getStrengthChefe(){
+	return chefeFinal.getStrength();
 }
 
 void Mapa::iniciarMapa(){
@@ -144,10 +152,11 @@ void Mapa::iniciarMapa3(){
 		mapa[i][29]='0';
 	}
 	mapa[15][0]='Z';
+	mapa[15][25]='B';
 	for (c=0;c<=(humanos-1);c++){
 		i=rand() % 30;
 		j=rand() % 30;
-		if (((i==15) && (j==0)) || (mapa[i][j]=='0')){
+		if (((i==15) && (j==0)) || (mapa[i][j]=='0') || ((i==15) && (j==25))){
 			c--;
 		}else{
 			mapa[i][j]='H';
@@ -164,7 +173,7 @@ void Mapa::exibirMapa() const{
 			if(mapa[i][j]=='Z'){
 				SetConsoleTextAttribute(console,12);
 				cout << " " << mapa[i][j];
-			}else if (mapa[i][j]=='H'){
+			}else if (mapa[i][j]=='H' || mapa[i][j]=='B'){
                 SetConsoleTextAttribute(console,15);
 				cout << " " << mapa[i][j];
 			}else if (mapa[i][j]=='0'){
@@ -222,7 +231,8 @@ void Mapa::procurarMapa(int *l, int *c){
 }
 
 void Mapa::verificarMapa(char d, int x, int y, int *l, int *c, Zumbi *const z1, int *c1){
-	int v;    
+	int v;
+	bool chefe=false;    
 	switch(d){
 		case '1':
 			if(mapa[x+1][y-1]=='1'){
@@ -231,7 +241,7 @@ void Mapa::verificarMapa(char d, int x, int y, int *l, int *c, Zumbi *const z1, 
 			    *l=x+1;
 			    *c=y-1;
 			}else if(mapa[x+1][y-1]=='H'){
-				v=z1->atacarHumano();
+				v=z1->atacarHumano(chefe);
 				if (v==1){
 				*c1=*c1+1;
                 humanosVivos--;
@@ -244,6 +254,16 @@ void Mapa::verificarMapa(char d, int x, int y, int *l, int *c, Zumbi *const z1, 
 			}else if((mapa[x+1][y-1]=='A') || (mapa[x+1][y-1]=='C')){
 				z1->pegarItem(mapa[x+1][y-1]);
 				mapa[x+1][y-1]='1';
+			}else if (mapa[x+1][y-1]=='B'){
+				chefe=true;
+				v=z1->atacarHumano(chefe);
+				if (v==1)
+			    mapa[x+1][y-1]='Z';
+				else if (v==0){
+			    cout << "Voce perdeu. Aperte qualquer botao para sair: ";
+				cin.get();
+			    exit(0);
+                }								
 			}
 		    break;
 		case '2':
@@ -254,7 +274,7 @@ void Mapa::verificarMapa(char d, int x, int y, int *l, int *c, Zumbi *const z1, 
 			    mapa[x][y]='1';
 			    *l=x+1;
 			}else if(mapa[x+1][y]=='H'){
-				v=z1->atacarHumano();
+				v=z1->atacarHumano(chefe);
 				if (v==1){
 				*c1=*c1+1;
                 humanosVivos--;
@@ -276,7 +296,7 @@ void Mapa::verificarMapa(char d, int x, int y, int *l, int *c, Zumbi *const z1, 
 			    *l=x+1;
 			    *c=y+1;
 			}else if(mapa[x+1][y+1]=='H'){
-				v=z1->atacarHumano();
+				v=z1->atacarHumano(chefe);
 				if (v==1){
 				*c1=*c1+1;
                 humanosVivos--;
@@ -299,7 +319,7 @@ void Mapa::verificarMapa(char d, int x, int y, int *l, int *c, Zumbi *const z1, 
 			    mapa[x][y]='1';
 			    *c=y-1;
 			}else if(mapa[x][y-1]=='H'){
-				v=z1->atacarHumano();
+				v=z1->atacarHumano(chefe);
 				if (v==1){
 				*c1=*c1+1;
                 humanosVivos--;
@@ -322,7 +342,7 @@ void Mapa::verificarMapa(char d, int x, int y, int *l, int *c, Zumbi *const z1, 
 			    mapa[x][y]='1';
 			    *c=y+1;
 			}else if(mapa[x][y+1]=='H'){
-				v=z1->atacarHumano();
+				v=z1->atacarHumano(chefe);
 				if (v==1){
 				*c1=*c1+1;
                 humanosVivos--;
@@ -344,7 +364,7 @@ void Mapa::verificarMapa(char d, int x, int y, int *l, int *c, Zumbi *const z1, 
 			    *l=x-1;
 			    *c=y-1;
 			}else if(mapa[x-1][y-1]=='H'){
-				v=z1->atacarHumano();
+				v=z1->atacarHumano(chefe);
 				if (v==1){
 				*c1=*c1+1;
                 humanosVivos--;
@@ -367,7 +387,7 @@ void Mapa::verificarMapa(char d, int x, int y, int *l, int *c, Zumbi *const z1, 
 			    mapa[x][y]='1';
 			    *l=x-1;
 			}else if(mapa[x-1][y]=='H'){
-				v=z1->atacarHumano();
+				v=z1->atacarHumano(chefe);
 				if (v==1){
 				*c1=*c1+1;
                 humanosVivos--;
@@ -389,7 +409,7 @@ void Mapa::verificarMapa(char d, int x, int y, int *l, int *c, Zumbi *const z1, 
 			    *l=x-1;
 			    *c=x+1;
 			}else if(mapa[x-1][y+1]=='H'){
-				v=z1->atacarHumano();
+				v=z1->atacarHumano(chefe);
 				if (v==1){
 				*c1=*c1+1;
                 humanosVivos--;

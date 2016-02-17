@@ -74,9 +74,12 @@ void Zumbi::pegarItem(char item){
 	}
 }
 
-int Zumbi::atacarHumano(){
+int Zumbi::atacarHumano(bool chefe){
 	int VidaH=vh, VidaZ=hp, Sh=200, Sz=strength, maismenos, atk, total;
 	char opt;
+	if (chefe){
+		VidaH=
+	}
 	srand(time(NULL));
 	do{
 		system("cls");

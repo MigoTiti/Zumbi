@@ -8,7 +8,7 @@ class Zumbi{
         Zumbi(const Zumbi &);
 		Zumbi(const string &);
         void exibirStatus() const;        
-		int atacarHumano();
+		int atacarHumano(bool);
 		void pegarItem(char);
 	private:
 		void setC();

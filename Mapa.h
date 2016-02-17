@@ -1,5 +1,6 @@
 #include "Zumbi.h"
 #include "Data.h"
+#include "Chefe.h"
 
 class Mapa{
 	public:
@@ -10,6 +11,8 @@ class Mapa{
         void exibirDia() const;
         void andarMapa(char, Zumbi *const, int *);
         void avancarDia();
+        int getVidaChefe();
+        int getStrengthChefe();
 	private:
         void verificarMapa(char, int, int, int *, int *, Zumbi *const, int *);
         void procurarMapa(int *, int *); 
@@ -19,5 +22,6 @@ class Mapa{
         static const int humanos;
         static int humanosVivos;
         Data dataAtual;
+        Chefe chefeFinal;
 };
 
