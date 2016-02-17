@@ -8,7 +8,7 @@
 const int Mapa::humanos=8;
 int Mapa::humanosVivos=humanos;
 
-Mapa::Mapa():data(16,02,2016){
+Mapa::Mapa():dataAtual(16,02,2016){
 }
 
 void Mapa::exibirHumanos(){
@@ -18,11 +18,11 @@ void Mapa::exibirHumanos(){
 
 void Mapa::exibirDia() const{
     cout << "O dia atual e: ";
-    data.imprimir();
+    dataAtual.imprimir();
 }
 
 void Mapa::avancarDia(){
-    data.incrementarDia();
+    dataAtual.incrementarDia();
 }
 
 void Mapa::iniciarMapa(){
