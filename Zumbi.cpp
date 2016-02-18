@@ -4,7 +4,7 @@
 #include <iostream>
 #include <conio.h>
 
-#define vh 4000
+#define vh 4
 
 Zumbi::Zumbi(){
 	this->nome="Sem nome";
@@ -74,16 +74,19 @@ void Zumbi::pegarItem(char item){
 	}
 }
 
-int Zumbi::atacarHumano(bool chefe){
+int Zumbi::atacarHumano(bool chefe, int vidaC, int strengthC){
 	int VidaH=vh, VidaZ=hp, Sh=200, Sz=strength, maismenos, atk, total;
 	char opt;
-	if (chefe){
-		VidaH=
-	}
+    string nomeH = "Humano";
+    if (chefe){
+        VidaH = vidaC;
+        Sh = strengthC;
+        nomeH = "Chefe";
+    }
 	srand(time(NULL));
 	do{
 		system("cls");
-		cout << "HP humano: " << VidaH << "    ";
+		cout << "HP " << nomeH << ": " << VidaH << "    ";
 		cout << "HP " << nome << ": " << VidaZ;
 		cout << "\n1- Ataque normal;";
 		cout << "\n2- Mordida (custa pontos de vida);";
@@ -145,7 +148,7 @@ int Zumbi::atacarHumano(bool chefe){
 						VidaZ=0;
 					}
 				}
-				cout << "Humano usou Ataque normal, causando " << total << " de dano.";
+				cout << nomeH <<" usou Ataque normal, causando " << total << " de dano.";
 				do{
 				cin.get();
 			    }while(cin.get()!='\n');

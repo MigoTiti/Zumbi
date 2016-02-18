@@ -3,7 +3,7 @@
 
 class Data{
 public:
-    Data(int, int, int);
+    Data(int,int,int);
     ~Data();
     void imprimir() const;
     void incrementarDia();

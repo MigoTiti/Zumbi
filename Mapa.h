@@ -1,3 +1,6 @@
+#ifndef MAPA_H
+#define MAPA_H
+
 #include "Zumbi.h"
 #include "Data.h"
 #include "Chefe.h"
@@ -9,13 +12,11 @@ class Mapa{
         static void exibirHumanos();
 		void exibirMapa() const;
         void exibirDia() const;
-        void andarMapa(char, Zumbi *const, int *);
+        void andarMapa(char,Zumbi *const,int *);
         void avancarDia();
-        int getVidaChefe();
-        int getStrengthChefe();
 	private:
-        void verificarMapa(char, int, int, int *, int *, Zumbi *const, int *);
-        void procurarMapa(int *, int *); 
+        void verificarMapa(char,int,int,int *,int *,Zumbi *const,int *);
+        void procurarMapa(int *,int *); 
 		void iniciarMapa2();
 		void iniciarMapa3();
 		char mapa[30][30];
@@ -25,3 +26,4 @@ class Mapa{
         Chefe chefeFinal;
 };
 
+#endif
