@@ -19,6 +19,8 @@ class Zumbi{
 		string nome;
 		int strength, hp;
 		bool capacete, armadura;
+        string *itens;
+        int numeroItens=0;
 };
 
 #endif
