@@ -195,11 +195,13 @@ void Mapa::andarMapa(char d, Zumbi *const z1, int *c){
 		verificarMapa(d,x,y,&x,&y,z1,c);
 		exibirMapa();
 		if ((*c==humanos) && (cfases==1)){
+			avancarDia();
 			cfases++;
 			iniciarMapa2();
 			procurarMapa(&x,&y);	
 			d=getche();
 		}else if ((*c==(humanos*2)) && (cfases==2)){
+			avancarDia();
 			cfases++;
 			iniciarMapa3();
 			procurarMapa(&x,&y);				

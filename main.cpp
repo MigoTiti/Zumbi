@@ -63,7 +63,6 @@ void escolha(char op, int *c, Zumbi *const z1, Mapa *const m1){
 			m1->exibirDia();
 			cout << "\nDeseja voltar ao menu? (s=1/n=0): ";
 			opt=getche();
-            m1->avancarDia();
 	        system("cls");
             if (opt=='0')
               exit(0);

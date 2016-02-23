@@ -11,7 +11,8 @@ Zumbi::Zumbi(){
     this->hp=5000;
     this->armadura=false;
     this->capacete=false;
-    this->strength=300;   
+    this->strength=300;
+    itens = new string[numeroItens];
 }
 
 Zumbi::Zumbi(const Zumbi &z1){
@@ -33,14 +34,9 @@ Zumbi::Zumbi(const string &name){
 void Zumbi::exibirStatus() const{
     cout << "Pontos de vida: " << hp;
     cout << "\nForca: " << strength;
-    if (armadura)
-        cout << "\nPossui armadura.";
-    else
-        cout << "\nNao possui armadura";
-    if (capacete)
-        cout << "\nPossui capacete.";
-    else
-        cout << "\nNao possui capacete";        
+    for(int i=0;i<numeroItens;i++){
+        cout << "possui " << itens[i] << ";";
+    }
 }
 
 void Zumbi::setA(){
@@ -54,10 +50,28 @@ void Zumbi::setC(){
 }
 
 void Zumbi::pegarItem(char item){
+    string *aux = new string[numeroItens];
+    if(numeroItens>0){
+        for (int i=0;i<numeroItens;i++){
+            aux[i] = itens[i];
+        }
+    }
+    
+    delete [] itens;
+    
+    itens = new string[++numeroItens];
+    
+    if((numeroItens-1)!=0){
+    	for (int i=0;i<numeroItens-1;i++){
+            itens[i] = aux[i];
+        }
+	}
+    
 	switch(item){
 		case 'C':
 			cout << "Voce pegou um capacete, +200 de vida.";
 			setC();
+            itens[numeroItens-1] = "capacete";
 			do{
 				cin.get();
 			    }while(cin.get()!='\n');
@@ -66,12 +80,14 @@ void Zumbi::pegarItem(char item){
 		case 'A':
 			cout << "Voce pegou uma armadura, +500 de vida.";
 			setA();
+            itens[numeroItens-1] = "armadura";
 			do{
 				cin.get();
 			    }while(cin.get()!='\n');
 			system("cls");
 			break;
 	}
+	delete [] aux;
 }
 
 int Zumbi::atacarHumano(bool chefe, int vidaC, int strengthC){

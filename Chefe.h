@@ -11,7 +11,7 @@ public:
     int getVida();
     int getStrength();
 private:
-    int hp;
+    int vida;
     int strength;
 };
 

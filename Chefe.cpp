@@ -2,7 +2,7 @@
 
 Chefe::Chefe()
 {
-    this->hp=5000;
+    this->vida=5000;
     this->strength=300;
 }
 
@@ -12,7 +12,7 @@ Chefe::~Chefe()
 
 void Chefe::incrementarVida()
 {
-    this->hp+=100;
+    this->vida+=100;
 }
 
 void Chefe::decrementarStrength()
@@ -27,5 +27,5 @@ int Chefe::getStrength()
 
 int Chefe::getVida()
 {
-    return this->hp;
+    return this->vida;
 }
