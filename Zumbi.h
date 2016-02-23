@@ -17,7 +17,7 @@ class Zumbi{
 		void setC();
 		void setA();      
 		string nome;
-		int strength, hp;
+		int strength, vida;
 		bool capacete, armadura;
         string *itens;
         int numeroItens=0;

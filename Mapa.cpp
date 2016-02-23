@@ -8,7 +8,8 @@
 const int Mapa::humanos=1;
 int Mapa::humanosVivos=humanos;
 
-Mapa::Mapa():dataAtual(16,02,2016),chefeFinal(){
+Mapa::Mapa(Zumbi *z2):dataAtual(16,02,2016),chefeFinal(){
+    this->zumbiJogador=z2;
 }
 
 void Mapa::exibirHumanos(){
@@ -187,12 +188,12 @@ void Mapa::exibirMapa() const{
 	}
 }
 
-void Mapa::andarMapa(char d, Zumbi *const z1, int *c){
+void Mapa::andarMapa(char d, int *c){
 	int x, y, cfases=1;
 	    procurarMapa(&x,&y);
 	    do{
 	    system("cls");
-		verificarMapa(d,x,y,&x,&y,z1,c);
+		verificarMapa(d,x,y,&x,&y,c);
 		exibirMapa();
 		if ((*c==humanos) && (cfases==1)){
 			avancarDia();
@@ -224,7 +225,7 @@ void Mapa::procurarMapa(int *l, int *c){
 	}
 }
 
-void Mapa::verificarMapa(char d, int x, int y, int *l, int *c, Zumbi *const z1, int *c1){
+void Mapa::verificarMapa(char d, int x, int y, int *l, int *c, int *c1){
 	int v;
 	bool chefe=false;    
 	switch(d){
@@ -235,7 +236,7 @@ void Mapa::verificarMapa(char d, int x, int y, int *l, int *c, Zumbi *const z1, 
 			    *l=x+1;
 			    *c=y-1;
 			}else if(mapa[x+1][y-1]=='H'){
-				v=z1->atacarHumano(chefe,chefeFinal.getVida(),chefeFinal.getStrength());
+				v=zumbiJogador->atacarHumano(chefe,chefeFinal.getVida(),chefeFinal.getStrength());
 				if (v==1){
 				*c1=*c1+1;
                 humanosVivos--;
@@ -248,11 +249,11 @@ void Mapa::verificarMapa(char d, int x, int y, int *l, int *c, Zumbi *const z1, 
 			    exit(0);
                 }
 			}else if((mapa[x+1][y-1]=='A') || (mapa[x+1][y-1]=='C')){
-				z1->pegarItem(mapa[x+1][y-1]);
+				zumbiJogador->pegarItem(mapa[x+1][y-1]);
 				mapa[x+1][y-1]='1';
 			}else if (mapa[x+1][y-1]=='B'){
 				chefe=true;
-				v=z1->atacarHumano(chefe,chefeFinal.getVida(),chefeFinal.getStrength());
+				v=zumbiJogador->atacarHumano(chefe,chefeFinal.getVida(),chefeFinal.getStrength());
 				if (v==1)
 			    mapa[x+1][y-1]='Z';
 				else if (v==0){
@@ -270,7 +271,7 @@ void Mapa::verificarMapa(char d, int x, int y, int *l, int *c, Zumbi *const z1, 
 			    mapa[x][y]='1';
 			    *l=x+1;
 			}else if(mapa[x+1][y]=='H'){
-				v=z1->atacarHumano(chefe,chefeFinal.getVida(),chefeFinal.getStrength());
+				v=zumbiJogador->atacarHumano(chefe,chefeFinal.getVida(),chefeFinal.getStrength());
 				if (v==1){
 				*c1=*c1+1;
                 humanosVivos--;
@@ -283,11 +284,11 @@ void Mapa::verificarMapa(char d, int x, int y, int *l, int *c, Zumbi *const z1, 
 			    exit(0);
                 }
 		    }else if((mapa[x+1][y]=='A') || (mapa[x+1][y]=='C')){
-				z1->pegarItem(mapa[x+1][y]);
+				zumbiJogador->pegarItem(mapa[x+1][y]);
 				mapa[x+1][y]='1';
 			}else if (mapa[x+1][y]=='B'){
 				chefe=true;
-				v=z1->atacarHumano(chefe,chefeFinal.getVida(),chefeFinal.getStrength());
+				v=zumbiJogador->atacarHumano(chefe,chefeFinal.getVida(),chefeFinal.getStrength());
 				if (v==1)
 			    mapa[x+1][y-1]='Z';
 				else if (v==0){
@@ -304,7 +305,7 @@ void Mapa::verificarMapa(char d, int x, int y, int *l, int *c, Zumbi *const z1, 
 			    *l=x+1;
 			    *c=y+1;
 			}else if(mapa[x+1][y+1]=='H'){
-				v=z1->atacarHumano(chefe,chefeFinal.getVida(),chefeFinal.getStrength());
+				v=zumbiJogador->atacarHumano(chefe,chefeFinal.getVida(),chefeFinal.getStrength());
 				if (v==1){
 				*c1=*c1+1;
                 humanosVivos--;
@@ -317,11 +318,11 @@ void Mapa::verificarMapa(char d, int x, int y, int *l, int *c, Zumbi *const z1, 
 			    exit(0);
                 }
 		    }else if((mapa[x+1][y+1]=='A') || (mapa[x+1][y+1]=='C')){
-				z1->pegarItem(mapa[x+1][y+1]);
+				zumbiJogador->pegarItem(mapa[x+1][y+1]);
 				mapa[x+1][y+1]='1';
 			}else if (mapa[x+1][y+1]=='B'){
 				chefe=true;
-				v=z1->atacarHumano(chefe,chefeFinal.getVida(),chefeFinal.getStrength());
+				v=zumbiJogador->atacarHumano(chefe,chefeFinal.getVida(),chefeFinal.getStrength());
 				if (v==1)
 			    mapa[x+1][y-1]='Z';
 				else if (v==0){
@@ -339,7 +340,7 @@ void Mapa::verificarMapa(char d, int x, int y, int *l, int *c, Zumbi *const z1, 
 			    mapa[x][y]='1';
 			    *c=y-1;
 			}else if(mapa[x][y-1]=='H'){
-				v=z1->atacarHumano(chefe,chefeFinal.getVida(),chefeFinal.getStrength());
+				v=zumbiJogador->atacarHumano(chefe,chefeFinal.getVida(),chefeFinal.getStrength());
 				if (v==1){
 				*c1=*c1+1;
                 humanosVivos--;
@@ -352,11 +353,11 @@ void Mapa::verificarMapa(char d, int x, int y, int *l, int *c, Zumbi *const z1, 
 			    exit(0);
                 }
 		    }else if((mapa[x][y-1]=='A') || (mapa[x][y-1]=='C')){
-				z1->pegarItem(mapa[x][y-1]);
+				zumbiJogador->pegarItem(mapa[x][y-1]);
 				mapa[x][y-1]='1';
 			}else if (mapa[x][y-1]=='B'){
 				chefe=true;
-				v=z1->atacarHumano(chefe,chefeFinal.getVida(),chefeFinal.getStrength());
+				v=zumbiJogador->atacarHumano(chefe,chefeFinal.getVida(),chefeFinal.getStrength());
 				if (v==1)
 			    mapa[x+1][y-1]='Z';
 				else if (v==0){
@@ -374,7 +375,7 @@ void Mapa::verificarMapa(char d, int x, int y, int *l, int *c, Zumbi *const z1, 
 			    mapa[x][y]='1';
 			    *c=y+1;
 			}else if(mapa[x][y+1]=='H'){
-				v=z1->atacarHumano(chefe,chefeFinal.getVida(),chefeFinal.getStrength());
+				v=zumbiJogador->atacarHumano(chefe,chefeFinal.getVida(),chefeFinal.getStrength());
 				if (v==1){
 				*c1=*c1+1;
                 humanosVivos--;
@@ -387,11 +388,11 @@ void Mapa::verificarMapa(char d, int x, int y, int *l, int *c, Zumbi *const z1, 
 			    exit(0);
                 }
 		    }else if((mapa[x][y+1]=='A') || (mapa[x][y+1]=='C')){
-				z1->pegarItem(mapa[x][y+1]);
+				zumbiJogador->pegarItem(mapa[x][y+1]);
 				mapa[x][y+1]='1';
 			}else if (mapa[x][y+1]=='B'){
 				chefe=true;
-				v=z1->atacarHumano(chefe,chefeFinal.getVida(),chefeFinal.getStrength());
+				v=zumbiJogador->atacarHumano(chefe,chefeFinal.getVida(),chefeFinal.getStrength());
 				if (v==1)
 			    mapa[x+1][y-1]='Z';
 				else if (v==0){
@@ -408,7 +409,7 @@ void Mapa::verificarMapa(char d, int x, int y, int *l, int *c, Zumbi *const z1, 
 			    *l=x-1;
 			    *c=y-1;
 			}else if(mapa[x-1][y-1]=='H'){
-				v=z1->atacarHumano(chefe,chefeFinal.getVida(),chefeFinal.getStrength());
+				v=zumbiJogador->atacarHumano(chefe,chefeFinal.getVida(),chefeFinal.getStrength());
 				if (v==1){
 				*c1=*c1+1;
                 humanosVivos--;
@@ -421,11 +422,11 @@ void Mapa::verificarMapa(char d, int x, int y, int *l, int *c, Zumbi *const z1, 
 			    exit(0);
                 }
 		    }else if((mapa[x-1][y-1]=='A') || (mapa[x-1][y-1]=='C')){
-				z1->pegarItem(mapa[x-1][y-1]);
+				zumbiJogador->pegarItem(mapa[x-1][y-1]);
 				mapa[x-1][y-1]='1';
 			}else if (mapa[x-1][y-1]=='B'){
 				chefe=true;
-				v=z1->atacarHumano(chefe,chefeFinal.getVida(),chefeFinal.getStrength());
+				v=zumbiJogador->atacarHumano(chefe,chefeFinal.getVida(),chefeFinal.getStrength());
 				if (v==1)
 			    mapa[x+1][y-1]='Z';
 				else if (v==0){
@@ -443,7 +444,7 @@ void Mapa::verificarMapa(char d, int x, int y, int *l, int *c, Zumbi *const z1, 
 			    mapa[x][y]='1';
 			    *l=x-1;
 			}else if(mapa[x-1][y]=='H'){
-				v=z1->atacarHumano(chefe,chefeFinal.getVida(),chefeFinal.getStrength());
+				v=zumbiJogador->atacarHumano(chefe,chefeFinal.getVida(),chefeFinal.getStrength());
 				if (v==1){
 				*c1=*c1+1;
                 humanosVivos--;
@@ -456,11 +457,11 @@ void Mapa::verificarMapa(char d, int x, int y, int *l, int *c, Zumbi *const z1, 
 			    exit(0);
                 }
 		    }else if((mapa[x-1][y]=='A') || (mapa[x-1][y]=='C')){
-				z1->pegarItem(mapa[x-1][y]);
+				zumbiJogador->pegarItem(mapa[x-1][y]);
                 mapa[x-1][y]='1';
 			}else if (mapa[x-1][y]=='B'){
 				chefe=true;
-				v=z1->atacarHumano(chefe,chefeFinal.getVida(),chefeFinal.getStrength());
+				v=zumbiJogador->atacarHumano(chefe,chefeFinal.getVida(),chefeFinal.getStrength());
 				if (v==1)
 			    mapa[x+1][y-1]='Z';
 				else if (v==0){
@@ -477,7 +478,7 @@ void Mapa::verificarMapa(char d, int x, int y, int *l, int *c, Zumbi *const z1, 
 			    *l=x-1;
 			    *c=x+1;
 			}else if(mapa[x-1][y+1]=='H'){
-				v=z1->atacarHumano(chefe,chefeFinal.getVida(),chefeFinal.getStrength());
+				v=zumbiJogador->atacarHumano(chefe,chefeFinal.getVida(),chefeFinal.getStrength());
 				if (v==1){
 				*c1=*c1+1;
                 humanosVivos--;
@@ -490,11 +491,11 @@ void Mapa::verificarMapa(char d, int x, int y, int *l, int *c, Zumbi *const z1, 
 			    exit(0);
 			    }
 		    }else if((mapa[x-1][y+1]=='A') || (mapa[x-1][y+1]=='C')){
-				z1->pegarItem(mapa[x-1][y+1]);
+				zumbiJogador->pegarItem(mapa[x-1][y+1]);
 				mapa[x-1][y+1]='1';
 			}else if (mapa[x-1][y+1]=='B'){
 				chefe=true;
-				v=z1->atacarHumano(chefe,chefeFinal.getVida(),chefeFinal.getStrength());
+				v=zumbiJogador->atacarHumano(chefe,chefeFinal.getVida(),chefeFinal.getStrength());
 				if (v==1)
 			    mapa[x+1][y-1]='Z';
 				else if (v==0){

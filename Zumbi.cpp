@@ -1,5 +1,6 @@
 #include "Zumbi.h"
 #include <random>
+#include <string>
 #include <ctime>
 #include <iostream>
 #include <conio.h>
@@ -8,70 +9,66 @@
 
 Zumbi::Zumbi(){
 	this->nome="Sem nome";
-    this->hp=5000;
+    this->vida=5000;
     this->armadura=false;
     this->capacete=false;
     this->strength=300;
-    itens = new string[numeroItens];
+    itens=new string[numeroItens];
 }
 
 Zumbi::Zumbi(const Zumbi &z1){
 	nome=z1.nome;
-	hp=z1.hp;
+	vida=z1.vida;
 	armadura=z1.armadura;
 	capacete=z1.capacete;
 	strength=z1.strength;
+    itens=z1.itens;
 }
 
 Zumbi::Zumbi(const string &name){
 	this->nome=name;
-    this->hp=5000;
+    this->vida=5000;
     this->armadura=false;
     this->capacete=false;
     this->strength=300;
+    itens=new string[numeroItens];
 }
 
 void Zumbi::exibirStatus() const{
-    cout << "Pontos de vida: " << hp;
+    cout << "Pontos de vida: " << vida;
     cout << "\nForca: " << strength;
     for(int i=0;i<numeroItens;i++){
-        cout << "possui " << itens[i] << ";";
+        cout << "\nPossui " << itens[i] << ";";
     }
 }
 
 void Zumbi::setA(){
 	armadura=true;
-    hp=hp+500;
+    vida=vida+500;
 }
 
 void Zumbi::setC(){
 	capacete=true;
-    hp=hp+200;
+    vida=vida+200;
 }
 
 void Zumbi::pegarItem(char item){
-    string *aux = new string[numeroItens];
-    if(numeroItens>0){
-        for (int i=0;i<numeroItens;i++){
-            aux[i] = itens[i];
-        }
+    
+    string *aux = new string[++numeroItens];
+    
+    for (int i=0;i<numeroItens-1;i++){
+        aux[i] = itens[i];
     }
     
     delete [] itens;
     
-    itens = new string[++numeroItens];
-    
-    if((numeroItens-1)!=0){
-    	for (int i=0;i<numeroItens-1;i++){
-            itens[i] = aux[i];
-        }
-	}
+    string itemAtual;
     
 	switch(item){
 		case 'C':
 			cout << "Voce pegou um capacete, +200 de vida.";
 			setC();
-            itens[numeroItens-1] = "capacete";
+            itemAtual = "capacete";
 			do{
 				cin.get();
 			    }while(cin.get()!='\n');
@@ -80,18 +77,19 @@ void Zumbi::pegarItem(char item){
 		case 'A':
 			cout << "Voce pegou uma armadura, +500 de vida.";
 			setA();
-            itens[numeroItens-1] = "armadura";
+            itemAtual = "armadura";
 			do{
 				cin.get();
 			    }while(cin.get()!='\n');
 			system("cls");
 			break;
 	}
-	delete [] aux;
+    aux[numeroItens-1] = itemAtual;
+	itens = aux;
 }
 
 int Zumbi::atacarHumano(bool chefe, int vidaC, int strengthC){
-	int VidaH=vh, VidaZ=hp, Sh=200, Sz=strength, maismenos, atk, total;
+	int VidaH=vh, VidaZ=vida, Sh=200, Sz=strength, maismenos, atk, total;
 	char opt;
     string nomeH = "Humano";
     if (chefe){

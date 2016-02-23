@@ -2,6 +2,7 @@
 #include <conio.h>
 #include <windows.h>
 #include "Mapa.h"
+#include <string>
 
 using namespace std;
 
@@ -18,7 +19,7 @@ int main(){
 	
 	Zumbi z1(nome);
 	
-    Mapa m1;
+    Mapa m1(&z1);
     
 	m1.iniciarMapa();
 
@@ -48,7 +49,7 @@ void escolha(char op, int *c, Zumbi *const z1, Mapa *const m1){
 			m1->exibirMapa();
 			cout << "\nUse o numpad para andar: ";
 			d=getche();
-			m1->andarMapa(d,z1,c);
+			m1->andarMapa(d,c);
 			break;
 		case '3':
             system("cls");
