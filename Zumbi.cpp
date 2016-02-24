@@ -16,6 +16,15 @@ Zumbi::Zumbi(){
     itens=new string[numeroItens];
 }
 
+ostream& operator<<(ostream &saida, const Zumbi &z1){
+	saida << "Pontos de vida: " << z1.vida;
+    saida << "\nForca: " << z1.strength;
+    for(int i=0;i<z1.numeroItens;i++){
+        saida << "\nPossui " << z1.itens[i] << ";";
+    }
+    return saida;
+}
+
 Zumbi::Zumbi(const Zumbi &z1){
 	nome=z1.nome;
 	vida=z1.vida;
@@ -34,12 +43,31 @@ Zumbi::Zumbi(const string &name){
     itens=new string[numeroItens];
 }
 
-void Zumbi::exibirStatus() const{
-    cout << "Pontos de vida: " << vida;
-    cout << "\nForca: " << strength;
+bool Zumbi::operator==(const Zumbi &z1) const{
+    if(nome != z1.nome)
+        return false;
+    
+    if(vida != z1.vida)
+        return false;
+        
+    if(armadura != z1.armadura)
+        return false;
+        
+    if(capacete != z1.capacete)
+        return false;
+        
+    if(strength != z1.strength)
+        return false;
+        
+    if(numeroItens != z1.numeroItens)
+        return false;
+        
     for(int i=0;i<numeroItens;i++){
-        cout << "\nPossui " << itens[i] << ";";
-    }
+    	if(itens[i] != z1.itens[i])
+    	    return false;
+	}
+	
+	return true;
 }
 
 void Zumbi::setA(){

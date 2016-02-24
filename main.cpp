@@ -18,8 +18,12 @@ int main(){
 	cin >> nome;
 	
 	Zumbi z1(nome);
+	Zumbi z2("teste");
 	
     Mapa m1(&z1);
+    
+    if(z1==z2)
+    cout << "iguais;";
     
 	m1.iniciarMapa();
 
@@ -53,7 +57,7 @@ void escolha(char op, int *c, Zumbi *const z1, Mapa *const m1){
 			break;
 		case '3':
             system("cls");
-            z1->exibirStatus();
+            cout << *z1;
 			cout << "\n\n\nDeseja voltar ao menu? (s=1/n=0): ";
 			opt=getche();
 	        system("cls");
