@@ -16,6 +16,7 @@ class Zumbi{
 		void pegarItem(char);
 		string getItem(int);
 		bool operator==(const Zumbi &) const;
+        void operator=(const Zumbi &);
 	private:
 		void setC();
 		void setA();      

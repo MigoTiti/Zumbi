@@ -18,12 +18,8 @@ int main(){
 	cin >> nome;
 	
 	Zumbi z1(nome);
-	Zumbi z2("teste");
 	
     Mapa m1(&z1);
-    
-    if(z1==z2)
-    cout << "iguais;";
     
 	m1.iniciarMapa();
 
