@@ -29,7 +29,7 @@ IncludeVersionInfo=0
 SupportXPThemes=0
 CompilerSet=0
 CompilerSettings=0000000000000000000000000
-UnitCount=9
+UnitCount=10
 
 [VersionInfo]
 Major=1
@@ -134,6 +134,16 @@ BuildCmd=
 FileName=..\Zumbi.h
 CompileCpp=1
 Folder=Zumbi
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit10]
+FileName=..\Humano.h
+CompileCpp=1
+Folder=
 Compile=1
 Link=1
 Priority=1000
