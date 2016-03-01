@@ -1,9 +1,8 @@
 #include "Chefe.h"
+#include "Humano.h"
 
-Chefe::Chefe()
+Chefe::Chefe():Humano(5000,300)
 {
-    this->vida=5000;
-    this->strength=300;
 }
 
 Chefe::~Chefe()

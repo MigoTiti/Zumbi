@@ -1,12 +1,13 @@
 #ifndef ZUMBI_H
 #define ZUMBI_H
 
+#include "Humano.h"
 #include <string>
 #include <iostream>
 
 using namespace std;
 
-class Zumbi{
+class Zumbi : public Humano{
 	friend ostream& operator<<(ostream &, const Zumbi &);
 	public:
         Zumbi();
@@ -21,7 +22,6 @@ class Zumbi{
 		void setC();
 		void setA();      
 		string nome;
-		int strength, vida;
 		bool capacete, armadura;
         string *itens;
         int numeroItens=0;

@@ -7,12 +7,10 @@
 
 #define vh 4
 
-Zumbi::Zumbi(){
+Zumbi::Zumbi():Humano(5000,300){
 	this->nome="Sem nome";
-    this->vida=5000;
     this->armadura=false;
     this->capacete=false;
-    this->strength=300;
     itens=new string[numeroItens];
 }
 
@@ -26,21 +24,17 @@ ostream& operator<<(ostream &saida, const Zumbi &z1){
     return saida;
 }
 
-Zumbi::Zumbi(const Zumbi &z1){
-	nome=z1.nome;
-	vida=z1.vida;
-	armadura=z1.armadura;
-	capacete=z1.capacete;
-	strength=z1.strength;
-    itens=z1.itens;
+Zumbi::Zumbi(const Zumbi &z1):Humano(z1.vida,z1.strength){
+	this->nome=z1.nome;
+	this->armadura=z1.armadura;
+	this->capacete=z1.capacete;
+    this->itens=z1.itens;
 }
 
-Zumbi::Zumbi(const string &name){
+Zumbi::Zumbi(const string &name):Humano(5000,300){
 	this->nome=name;
-    this->vida=5000;
     this->armadura=false;
     this->capacete=false;
-    this->strength=300;
     itens=new string[numeroItens];
 }
 

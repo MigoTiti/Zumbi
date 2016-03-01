@@ -1,7 +1,8 @@
 #ifndef CHEFE_H
 #define CHEFE_H
+#include "Humano.h"
 
-class Chefe
+class Chefe : public Humano
 {
 public:
     Chefe();
@@ -11,8 +12,7 @@ public:
     int getVida();
     int getStrength();
 private:
-    int vida;
-    int strength;
+    bool arma;
 };
 
 #endif
