@@ -4,6 +4,7 @@
 #include <random>
 #include <ctime>
 #include <iostream>
+#include <thread>
 
 const int Mapa::humanos=1;
 int Mapa::humanosVivos=humanos;
@@ -191,25 +192,27 @@ void Mapa::exibirMapa() const{
 void Mapa::andarMapa(char d, int *c){
 	int x, y, cfases=1;
 	    procurarMapa(&x,&y);
+	    
 	    do{
-	    system("cls");
-		verificarMapa(d,x,y,&x,&y,c);
-		exibirMapa();
-		if ((*c==humanos) && (cfases==1)){
-			avancarDia();
-			cfases++;
-			iniciarMapa2();
-			procurarMapa(&x,&y);	
-			d=getche();
-		}else if ((*c==(humanos*2)) && (cfases==2)){
-			avancarDia();
-			cfases++;
-			iniciarMapa3();
-			procurarMapa(&x,&y);				
-			d=getche();
-		}else{
-			d=getche();
-		}
+	        system("cls");
+    		exibirMapa();	    
+	    	verificarMapa(d,x,y,&x,&y,c);
+	    	
+		    if ((*c==humanos) && (cfases==1)){
+		    	avancarDia();
+		    	cfases++;
+	    		iniciarMapa2();
+	    		procurarMapa(&x,&y);	
+	    		d=getche();
+		    }else if ((*c==(humanos*2)) && (cfases==2)){
+		    	avancarDia();
+			    cfases++;
+			    iniciarMapa3();
+			    procurarMapa(&x,&y);				
+			    d=getche();
+		    }else
+			    d=getche();
+			    
 	    }while(d!='0');
 }
 
@@ -220,6 +223,7 @@ void Mapa::procurarMapa(int *l, int *c){
 			if(mapa[i][j]=='Z'){
 				*l=i;
 				*c=j;
+				break;
 			}
 		}
 	}

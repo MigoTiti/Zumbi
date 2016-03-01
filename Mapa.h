@@ -1,6 +1,7 @@
 #ifndef MAPA_H
 #define MAPA_H
 
+#include <thread>
 #include "Zumbi.h"
 #include "Data.h"
 #include "Chefe.h"
@@ -14,6 +15,7 @@ class Mapa{
         void exibirDia() const;
         void andarMapa(char,int *);
         void avancarDia();
+        //void runThread()
 	private:
         void verificarMapa(char,int,int,int *,int *,int *);
         void procurarMapa(int *,int *); 
@@ -25,6 +27,7 @@ class Mapa{
         Zumbi *zumbiJogador;
         Data dataAtual;
         Chefe chefeFinal;
+        //thread mapa;
 };
 
 #endif
