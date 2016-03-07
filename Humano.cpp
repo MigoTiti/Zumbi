@@ -23,7 +23,7 @@ void Humano::operator=(const Humano &h1){
 }
 
 ostream& operator<<(ostream &saida, const Humano &h1){
-	saida << "Pontos de vida: " << h1.vida;
+	saida << "\nPontos de vida: " << h1.vida;
     saida << "\nForca: " << h1.strength;
     
     return saida;

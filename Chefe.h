@@ -4,13 +4,16 @@
 
 class Chefe : public Humano
 {
+	friend ostream& operator<<(ostream &, const Chefe &);
 public:
     Chefe();
+    Chefe(const Chefe &c);
     ~Chefe();
     void incrementarVida();
     void decrementarStrength();
     int getVida();
     int getStrength();
+    void operator=(const Chefe &);
 private:
     bool arma;
 };

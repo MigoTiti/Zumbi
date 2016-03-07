@@ -12,13 +12,13 @@ class Zumbi : public Humano{
 	public:
         Zumbi();
         Zumbi(const Zumbi &);
-		Zumbi(const string &);       
+		Zumbi(const string &, int, int);       
 		int atacarHumano(bool,int,int);
 		void pegarItem(char);
 		string getItem(int);
 		bool operator==(const Zumbi &) const;
         void operator=(const Zumbi &);
-	private:
+	protected:
 		void setC();
 		void setA();      
 		string nome;

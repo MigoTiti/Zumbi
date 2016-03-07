@@ -17,7 +17,12 @@ int main(){
 	string nome;
 	cin >> nome;
 	
-	Zumbi z1(nome);
+	Zumbi z1(nome,5000,300);
+	Zumbi z2("titi2",4000,200);
+
+	
+	z2 = z1;
+	cout << z2;
 	
     Mapa m1(&z1);
     
@@ -87,7 +92,7 @@ void escolha(char op, int *c, Zumbi *const z1, Mapa *const m1){
 
 char menu(){
 	char op;
-	system("cls");
+	//system("cls");
 	cout << "Escolha uma opcao:\n\n";
 	cout << "1-Ver mapa; \n";
 	cout << "2-Andar; \n";

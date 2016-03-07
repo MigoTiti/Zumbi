@@ -15,8 +15,9 @@ Zumbi::Zumbi():Humano(5000,300){
 }
 
 ostream& operator<<(ostream &saida, const Zumbi &z1){
-	saida << "Pontos de vida: " << z1.vida;
-    saida << "\nForca: " << z1.strength;
+	
+	saida << "\n" << z1.nome;
+	saida << static_cast <Humano> (z1);
     
     for(int i=0;i<z1.numeroItens;i++){
         saida << "\nPossui " << z1.itens[i] << ";";
@@ -24,14 +25,14 @@ ostream& operator<<(ostream &saida, const Zumbi &z1){
     return saida;
 }
 
-Zumbi::Zumbi(const Zumbi &z1):Humano(z1.vida,z1.strength){
+Zumbi::Zumbi(const Zumbi &z1):Humano(static_cast <Humano> (z1)){
 	this->nome=z1.nome;
 	this->armadura=z1.armadura;
 	this->capacete=z1.capacete;
     this->itens=z1.itens;
 }
 
-Zumbi::Zumbi(const string &name):Humano(5000,300){
+Zumbi::Zumbi(const string &name, int vida, int strength):Humano(vida,strength){
 	this->nome=name;
     this->armadura=false;
     this->capacete=false;
@@ -39,12 +40,16 @@ Zumbi::Zumbi(const string &name):Humano(5000,300){
 }
 
 void Zumbi::operator=(const Zumbi &z1){
+	
+	
     this->nome = z1.nome;
-    this->vida=z1.vida;
     this->armadura=z1.armadura;
     this->capacete=z1.capacete;
-    this->strength=z1.strength; 
     this->numeroItens=z1.numeroItens;
+    static_cast <Humano> (z1);
+    //this->vida=z1.vida;
+    //this->strength=z1.strength;
+    static_cast<Humano>(z1)=z1;
     
     delete [] itens;
     itens = new string[this->numeroItens];
