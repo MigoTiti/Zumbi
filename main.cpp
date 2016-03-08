@@ -18,11 +18,6 @@ int main(){
 	cin >> nome;
 	
 	Zumbi z1(nome,5000,300);
-	Zumbi z2("titi2",4000,200);
-
-	
-	z2 = z1;
-	cout << z2;
 	
     Mapa m1(&z1);
     

@@ -21,7 +21,8 @@ Chefe::Chefe(const Chefe &c):Humano(static_cast <Humano> (c)){
 }
 
 void Chefe::operator=(const Chefe &c1){
-	
+	static_cast<Humano&> (*this) = static_cast <Humano>(c1);
+	this->arma = c1.arma;
 }
 
 Chefe::~Chefe()

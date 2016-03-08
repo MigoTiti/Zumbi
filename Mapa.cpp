@@ -13,7 +13,7 @@ Mapa::Mapa(Zumbi *z2):dataAtual(16,02,2016),chefeFinal(){
     this->zumbiJogador=z2;
 }
 
-Mapa::Mapa(Zumbi_hunter *z2):dataAtual(16,02,2016),chefeFinal(){
+Mapa::Mapa(ZumbiHunter *z2):dataAtual(16,02,2016),chefeFinal(){
     this->hunterJogador=z2;
 }
 
