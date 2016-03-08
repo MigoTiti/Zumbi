@@ -46,10 +46,8 @@ void Zumbi::operator=(const Zumbi &z1){
     this->armadura=z1.armadura;
     this->capacete=z1.capacete;
     this->numeroItens=z1.numeroItens;
-    static_cast <Humano> (z1);
-    //this->vida=z1.vida;
-    //this->strength=z1.strength;
-    static_cast<Humano>(z1)=z1;
+    
+	static_cast<Humano&> (*this) = static_cast <Humano>(z1);
     
     delete [] itens;
     itens = new string[this->numeroItens];
@@ -60,20 +58,20 @@ void Zumbi::operator=(const Zumbi &z1){
 }
 
 bool Zumbi::operator==(const Zumbi &z1) const{
-    if(nome != z1.nome)
+    if(this->nome != z1.nome)
         return false;
-    if(vida != z1.vida)
+    if(this->vida != z1.vida)
         return false;
-    if(armadura != z1.armadura)
+    if(this->armadura != z1.armadura)
         return false;
-    if(capacete != z1.capacete)
+    if(this->capacete != z1.capacete)
         return false;
-    if(strength != z1.strength)
+    if(this->strength != z1.strength)
         return false;
-    if(numeroItens != z1.numeroItens)
+    if(this->numeroItens != z1.numeroItens)
         return false;
-    for(int i=0;i<numeroItens;i++){
-    	if(itens[i] != z1.itens[i])
+    for(int i=0;i<this->numeroItens;i++){
+    	if(this->itens[i] != z1.itens[i])
     	    return false;
 	}
 	return true;

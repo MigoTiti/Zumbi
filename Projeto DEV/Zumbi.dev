@@ -161,9 +161,9 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit12]
-FileName=..\Zumbi_hunter.h
+FileName=..\ZumbiHunter.h
 CompileCpp=1
-Folder=
+Folder=Zumbi
 Compile=1
 Link=1
 Priority=1000
@@ -171,9 +171,9 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit13]
-FileName=..\Zumbi_hunter.cpp
+FileName=..\ZumbiHunter.cpp
 CompileCpp=1
-Folder=
+Folder=Zumbi
 Compile=1
 Link=1
 Priority=1000

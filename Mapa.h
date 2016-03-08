@@ -3,14 +3,14 @@
 
 #include <thread>
 #include "Zumbi.h"
-#include "Zumbi_hunter.h"
+#include "ZumbiHunter.h"
 #include "Data.h"
 #include "Chefe.h"
 
 class Mapa{
 	public:
 		Mapa(Zumbi*);
-		Mapa(Zumbi_hunter*);
+		Mapa(ZumbiHunter*);
 		void iniciarMapa();
         static void exibirHumanos();
 		void exibirMapa() const;
@@ -26,7 +26,7 @@ class Mapa{
         static const int humanos;
         static int humanosVivos;
         Zumbi *zumbiJogador;
-        Zumbi_hunter *hunterJogador;
+        ZumbiHunter *hunterJogador;
         Data dataAtual;
         Chefe chefeFinal;
 };
