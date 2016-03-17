@@ -1,4 +1,11 @@
 #include "ZumbiCharger.h"
+#include <random>
+#include <string>
+#include <ctime>
+#include <iostream>
+#include <conio.h>
+
+#define vh 4000
 
 ZumbiCharger::ZumbiCharger():Zumbi("Sem nome",5000,400){
     this->stamina = 50;
@@ -8,7 +15,7 @@ ZumbiCharger::ZumbiCharger(const string &nome, int vida, int strength):Zumbi(nom
     this->stamina = 50;
 }
 
-ZumbiCharger::ZumbiCharger(const ZumbiCharger &z1):Zumbi(z1.nome,z1.vida,z1.velocidade){
+ZumbiCharger::ZumbiCharger(const ZumbiCharger &z1):Zumbi(z1.nome,z1.vida,z1.strength){
 	this->stamina = z1.stamina;
 }
 
@@ -146,8 +153,3 @@ int ZumbiCharger::atacarHumano(bool chefe, int vidaC, int strengthC){
 	    return 1;
     }
 }
-
-ZumbiCharger::~ZumbiCharger()
-{
-}
-
