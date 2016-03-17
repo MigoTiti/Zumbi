@@ -245,7 +245,7 @@ void Mapa::verificarMapa(char d, int x, int y, int *l, int *c, int *c1){
 				*c1=*c1+1;
                 humanosVivos--;
 			    mapa[x+1][y-1]='Z';
-                chefeFinal.incrementarVida();
+                chefeFinal.incrementarVida(100);
                 chefeFinal.decrementarStrength();
 			    }else if (v==0){
 			    cout << "Voce perdeu. Aperte qualquer botao para sair: ";
@@ -279,7 +279,7 @@ void Mapa::verificarMapa(char d, int x, int y, int *l, int *c, int *c1){
 				if (v==1){
 				*c1=*c1+1;
                 humanosVivos--;
-                chefeFinal.incrementarVida();
+                chefeFinal.incrementarVida(100);
                 chefeFinal.decrementarStrength();
 			    mapa[x+1][y]='Z';
 			    }else if (v==0){
@@ -313,7 +313,7 @@ void Mapa::verificarMapa(char d, int x, int y, int *l, int *c, int *c1){
 				if (v==1){
 				*c1=*c1+1;
                 humanosVivos--;
-                chefeFinal.incrementarVida();
+                chefeFinal.incrementarVida(100);
                 chefeFinal.decrementarStrength();
 			    mapa[x+1][y+1]='Z';
 			    }else if (v==0){
@@ -348,7 +348,7 @@ void Mapa::verificarMapa(char d, int x, int y, int *l, int *c, int *c1){
 				if (v==1){
 				*c1=*c1+1;
                 humanosVivos--;
-                chefeFinal.incrementarVida();
+                chefeFinal.incrementarVida(100);
                 chefeFinal.decrementarStrength();
 			    mapa[x][y-1]='Z';
 			    }else if (v==0){
@@ -383,7 +383,7 @@ void Mapa::verificarMapa(char d, int x, int y, int *l, int *c, int *c1){
 				if (v==1){
 				*c1=*c1+1;
                 humanosVivos--;
-                chefeFinal.incrementarVida();
+                chefeFinal.incrementarVida(100);
                 chefeFinal.decrementarStrength();
 			    mapa[x][y+1]='Z';
 			    }else if (v==0){
@@ -417,7 +417,7 @@ void Mapa::verificarMapa(char d, int x, int y, int *l, int *c, int *c1){
 				if (v==1){
 				*c1=*c1+1;
                 humanosVivos--;
-                chefeFinal.incrementarVida();
+                chefeFinal.incrementarVida(100);
                 chefeFinal.decrementarStrength();
 			    mapa[x-1][y-1]='Z';
 			    }else if (v==0){
@@ -452,7 +452,7 @@ void Mapa::verificarMapa(char d, int x, int y, int *l, int *c, int *c1){
 				if (v==1){
 				*c1=*c1+1;
                 humanosVivos--;
-                chefeFinal.incrementarVida();
+                chefeFinal.incrementarVida(100);
                 chefeFinal.decrementarStrength();
 			    mapa[x-1][y]='Z';
 			    }else if (v==0){
@@ -486,7 +486,7 @@ void Mapa::verificarMapa(char d, int x, int y, int *l, int *c, int *c1){
 				if (v==1){
 				*c1=*c1+1;
                 humanosVivos--;
-                chefeFinal.incrementarVida();
+                chefeFinal.incrementarVida(100);
                 chefeFinal.decrementarStrength();
 			    mapa[x-1][y+1]='Z';
 			    }else if (v==0){

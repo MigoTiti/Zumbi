@@ -15,6 +15,7 @@ class Zumbi : public Humano{
         Zumbi(const Zumbi &);
 		Zumbi(const string &, int, int);       
 		virtual int atacarHumano(bool,int,int) = 0;
+        virtual void incrementarVida(int);
 		void pegarItem(char);
 		string getItem(int);
 		bool operator==(const Zumbi &) const;

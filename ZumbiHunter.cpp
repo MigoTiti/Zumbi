@@ -63,7 +63,7 @@ bool ZumbiHunter::operator==(const ZumbiHunter &z1){
     if(this->velocidade != z1.velocidade)
         return false;
     for(int i=0;i<this->numeroItens;i++){
-    	if(this->itens[i] != z1.itens[i])
+    	if(this->itens.at(i) != z1.itens.at(i))
     	    return false;
 	}
 	return true;

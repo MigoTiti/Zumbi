@@ -9,7 +9,7 @@ public:
     Chefe();
     Chefe(const Chefe &c);
     ~Chefe();
-    void incrementarVida();
+    virtual void incrementarVida(int);
     void decrementarStrength();
     int getVida();
     int getStrength();

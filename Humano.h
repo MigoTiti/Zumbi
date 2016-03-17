@@ -9,7 +9,7 @@ class Humano{
 	public:
         Humano(int, int);
         Humano(const Humano &);
-		//virtual int atacarHumano(bool,int,int) = 0;        
+		virtual void incrementarVida(int) = 0;        
 	protected:
 		int strength, vida;
 };

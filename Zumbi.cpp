@@ -13,7 +13,7 @@ Zumbi::Zumbi():Humano(5000,300){
     this->capacete=false;
 }
 
-Zumbi::Zumbi(const Zumbi &z1):Humano(static_cast <Humano> (z1)){
+Zumbi::Zumbi(const Zumbi &z1):Humano(z1.vida,z1.strength){
 	this->nome=z1.nome;
 	this->armadura=z1.armadura;
 	this->capacete=z1.capacete;
@@ -46,14 +46,18 @@ bool Zumbi::operator==(const Zumbi &z1) const{
 	return true;
 }
 
+void Zumbi::incrementarVida(int valor){
+    this->vida += valor;
+}
+
 void Zumbi::setA(){
 	armadura=true;
-    vida=vida+500;
+    incrementarVida(500);
 }
 
 void Zumbi::setC(){
 	capacete=true;
-    vida=vida+200;
+    incrementarVida(300);
 }
 
 void Zumbi::pegarItem(char item){

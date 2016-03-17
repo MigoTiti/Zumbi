@@ -31,9 +31,9 @@ Chefe::~Chefe()
 {
 }
 
-void Chefe::incrementarVida()
+void Chefe::incrementarVida(int valor)
 {
-    this->vida+=100;
+    this->vida+=valor;
 }
 
 void Chefe::decrementarStrength()
