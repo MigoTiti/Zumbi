@@ -16,15 +16,3 @@ Humano::Humano(const Humano &h1){
 	this->vida = h1.vida;
 	this->strength = h1.strength;
 }
-
-void Humano::operator=(const Humano &h1){
-    this->vida=h1.vida;
-    this->strength=h1.strength; 
-}
-
-ostream& operator<<(ostream &saida, const Humano &h1){
-	saida << "\nPontos de vida: " << h1.vida;
-    saida << "\nForca: " << h1.strength;
-    
-    return saida;
-}

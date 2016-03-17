@@ -8,12 +8,11 @@
 using namespace std;
 
 class Zumbi : public Humano{
-	friend ostream& operator<<(ostream &, const Zumbi &);
 	public:
         Zumbi();
         Zumbi(const Zumbi &);
 		Zumbi(const string &, int, int);       
-		int atacarHumano(bool,int,int);
+		virtual int atacarHumano(bool,int,int) = 0;
 		void pegarItem(char);
 		string getItem(int);
 		bool operator==(const Zumbi &) const;

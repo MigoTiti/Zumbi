@@ -6,7 +6,7 @@
 
 using namespace std;
 
-void escolha(char op, int *c, Zumbi *const z1, Mapa *const m1);
+void escolha(char op, int *c, ZumbiHunter *const z1, Mapa *const m1);
 char menu();
 
 HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -17,7 +17,7 @@ int main(){
 	string nome;
 	cin >> nome;
 	
-	Zumbi z1(nome,5000,300);
+	ZumbiHunter z1(nome,5000,300);
 	
     Mapa m1(&z1);
     
@@ -31,7 +31,7 @@ int main(){
     }while(op!=666);
 }	
 
-void escolha(char op, int *c, Zumbi *const z1, Mapa *const m1){
+void escolha(char op, int *c, ZumbiHunter *const z1, Mapa *const m1){
 	char d, opt;
     system("cls");
 	switch(op){
@@ -87,7 +87,7 @@ void escolha(char op, int *c, Zumbi *const z1, Mapa *const m1){
 
 char menu(){
 	char op;
-	//system("cls");
+	system("cls");
 	cout << "Escolha uma opcao:\n\n";
 	cout << "1-Ver mapa; \n";
 	cout << "2-Andar; \n";

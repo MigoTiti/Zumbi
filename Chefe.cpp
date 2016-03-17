@@ -2,7 +2,8 @@
 #include "Humano.h"
 
 ostream& operator<<(ostream &saida, const Chefe &c1){
-	saida << static_cast <Humano> (c1);
+	saida << "\nPontos de vida: " << c1.vida;
+    saida << "\nForca: " << c1.strength;
 	
 	if(c1.arma)
 	    saida << "Possui arma.";
@@ -16,12 +17,13 @@ Chefe::Chefe():Humano(5000,300)
 {
 }
 
-Chefe::Chefe(const Chefe &c):Humano(static_cast <Humano> (c)){
+Chefe::Chefe(const Chefe &c):Humano(c.vida,c.strength){
 	this->arma = c.arma;
 }
 
 void Chefe::operator=(const Chefe &c1){
-	static_cast<Humano&> (*this) = static_cast <Humano>(c1);
+	this->vida = c1.vida;
+	this->strength = c1.strength;
 	this->arma = c1.arma;
 }
 

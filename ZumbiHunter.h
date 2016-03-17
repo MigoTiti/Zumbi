@@ -15,6 +15,7 @@ class ZumbiHunter : public Zumbi{
 		ZumbiHunter(const string &, int, int);       
 		bool operator==(const ZumbiHunter &);
         void operator=(const ZumbiHunter &);
+        virtual int atacarHumano(bool,int,int);
 	protected:
 		int velocidade;
 };

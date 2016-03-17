@@ -9,7 +9,6 @@
 
 class Mapa{
 	public:
-		Mapa(Zumbi*);
 		Mapa(ZumbiHunter*);
 		void iniciarMapa();
         static void exibirHumanos();
@@ -25,7 +24,6 @@ class Mapa{
 		char mapa[30][30];
         static const int humanos;
         static int humanosVivos;
-        Zumbi *zumbiJogador;
         ZumbiHunter *hunterJogador;
         Data dataAtual;
         Chefe chefeFinal;
