@@ -11,7 +11,6 @@ Zumbi::Zumbi():Humano(5000,300){
 	this->nome="Sem nome";
     this->armadura=false;
     this->capacete=false;
-    itens=new string[numeroItens];
 }
 
 Zumbi::Zumbi(const Zumbi &z1):Humano(static_cast <Humano> (z1)){
@@ -25,7 +24,6 @@ Zumbi::Zumbi(const string &name, int vida, int strength):Humano(vida,strength){
 	this->nome=name;
     this->armadura=false;
     this->capacete=false;
-    itens=new string[numeroItens];
 }
 
 bool Zumbi::operator==(const Zumbi &z1) const{
@@ -59,15 +57,6 @@ void Zumbi::setC(){
 }
 
 void Zumbi::pegarItem(char item){
-    
-    string *aux = new string[++numeroItens];
-    
-    for (int i=0;i<numeroItens-1;i++){
-        aux[i] = itens[i];
-    }
-    
-    delete [] itens;
-    
     string itemAtual;
     
 	switch(item){
@@ -90,6 +79,6 @@ void Zumbi::pegarItem(char item){
 			system("cls");
 			break;
 	}
-    aux[numeroItens-1] = itemAtual;
-	itens = aux;
+    this->numeroItens++;
+    itens.push_back(itemAtual);
 }

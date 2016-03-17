@@ -25,7 +25,7 @@ ostream& operator<<(ostream &saida, const ZumbiHunter &z1){
     saida << "\nForca: " << z1.strength;
     
     for(int i=0;i<z1.numeroItens;i++){
-        saida << "\nPossui " << z1.itens[i] << ";";
+        saida << "\nPossui " << z1.itens.at(i) << ";";
     }
     
 	saida << "\nVelocidade: " << z1.velocidade;
@@ -41,12 +41,9 @@ void ZumbiHunter::operator=(const ZumbiHunter &z1){
 	this->vida=z1.vida;
     this->strength=z1.strength; 
     
-    delete [] itens;
-    itens = new string[this->numeroItens];
+    this->itens.clear();
+    this->itens = vector<string>(z1.itens);
     
-    for (int i=0;i<numeroItens;i++){
-        this->itens[i] = z1.itens[i];
-    }
     this->velocidade = z1.velocidade;
 }
 

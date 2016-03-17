@@ -4,6 +4,8 @@
 #include "Humano.h"
 #include <string>
 #include <iostream>
+#include <vector>
+#include <string>
 
 using namespace std;
 
@@ -22,7 +24,7 @@ class Zumbi : public Humano{
 		void setA();      
 		string nome;
 		bool capacete, armadura;
-        string *itens;
+        vector<string> itens;
         int numeroItens=0;
 };
 
