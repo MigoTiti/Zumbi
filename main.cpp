@@ -2,11 +2,11 @@
 #include <conio.h>
 #include <windows.h>
 #include "Mapa.h"
-#include <string>
+#include "ZumbiCharger.h"
 
 using namespace std;
 
-void escolha(char op, int *c, ZumbiHunter *const z1, Mapa *const m1);
+void escolha(char op, int *c, Zumbi *const z1, Mapa *const m1);
 char menu();
 
 HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -16,10 +16,23 @@ int main(){
 	cout << "Digite o nome do zumbi: ";
 	string nome;
 	cin >> nome;
+
+	vector<Zumbi*> jogador;
+
+	char escolhaClasse;
+	system("cls");
+
+	cout << "Escolha a classe do zumbi: \n";
+	cout << "1-Hunter; \n";
+	cout << "2-Charger. \n";
+	escolhaClasse=getche();
+
+	if(escolhaClasse=='1')
+		jogador.push_back(new ZumbiHunter(nome,4000,200));
+	else if(escolhaClasse=='2')
+		jogador.push_back(new ZumbiCharger(nome,6000,300));
 	
-	ZumbiHunter z1(nome,5000,300);
-	
-    Mapa m1(&z1);
+    Mapa m1(jogador.at(0));
     
 	m1.iniciarMapa();
 
@@ -27,12 +40,16 @@ int main(){
 	char op;
 	do{
 	op=menu();
-	escolha(op,&c,&z1,&m1);
+	escolha(op,&c,jogador.at(0),&m1);
     }while(op!=666);
 }	
 
-void escolha(char op, int *c, ZumbiHunter *const z1, Mapa *const m1){
+void escolha(char op, int *c, Zumbi *const z1, Mapa *const m1){
 	char d, opt;
+
+	ZumbiHunter* zHunter = dynamic_cast<ZumbiHunter *> (z1);
+	ZumbiCharger* zCharger = dynamic_cast<ZumbiCharger* > (z1);
+
     system("cls");
 	switch(op){
 		case '1':
@@ -42,7 +59,7 @@ void escolha(char op, int *c, ZumbiHunter *const z1, Mapa *const m1){
 			opt=getche();
 	        system("cls");
             if (opt=='0')
-              exit(0);
+				exit(0);
 			break;
 		case '2':
 			system("cls");
@@ -53,7 +70,10 @@ void escolha(char op, int *c, ZumbiHunter *const z1, Mapa *const m1){
 			break;
 		case '3':
             system("cls");
-            cout << *z1;
+			if(zHunter!=0)
+                cout << *zHunter;
+			else if(zCharger!=0)
+				cout << *zCharger;
 			cout << "\n\n\nDeseja voltar ao menu? (s=1/n=0): ";
 			opt=getche();
 	        system("cls");

@@ -20,7 +20,7 @@ ZumbiHunter::ZumbiHunter(const ZumbiHunter &z1):Zumbi(z1.nome,z1.vida,z1.velocid
 }
 
 ostream& operator<<(ostream &saida, const ZumbiHunter &z1){
-	saida << "\n" << z1.nome;
+	saida << z1.nome;
 	saida << "\nPontos de vida: " << z1.vida;
     saida << "\nForca: " << z1.strength;
     

@@ -2,15 +2,12 @@
 #include <conio.h>
 #include <windows.h>
 #include <random>
-#include <ctime>
-#include <iostream>
-#include <thread>
 
 const int Mapa::humanos=1;
 int Mapa::humanosVivos=humanos;
 
-Mapa::Mapa(ZumbiHunter *z2):dataAtual(16,02,2016),chefeFinal(){
-    this->hunterJogador=z2;
+Mapa::Mapa(Zumbi *z2):dataAtual(16,02,2016),chefeFinal(){
+    this->Jogador=z2;
 }
 
 void Mapa::exibirHumanos(){
@@ -240,7 +237,7 @@ void Mapa::verificarMapa(char d, int x, int y, int *l, int *c, int *c1){
 			    *l=x+1;
 			    *c=y-1;
 			}else if(mapa[x+1][y-1]=='H'){
-				v=hunterJogador->atacarHumano(chefe,chefeFinal.getVida(),chefeFinal.getStrength());
+				v=Jogador->atacarHumano(chefe,chefeFinal.getVida(),chefeFinal.getStrength());
 				if (v==1){
 				*c1=*c1+1;
                 humanosVivos--;
@@ -253,11 +250,11 @@ void Mapa::verificarMapa(char d, int x, int y, int *l, int *c, int *c1){
 			    exit(0);
                 }
 			}else if((mapa[x+1][y-1]=='A') || (mapa[x+1][y-1]=='C')){
-				hunterJogador->pegarItem(mapa[x+1][y-1]);
+				Jogador->pegarItem(mapa[x+1][y-1]);
 				mapa[x+1][y-1]='1';
 			}else if (mapa[x+1][y-1]=='B'){
 				chefe=true;
-				v=hunterJogador->atacarHumano(chefe,chefeFinal.getVida(),chefeFinal.getStrength());
+				v=Jogador->atacarHumano(chefe,chefeFinal.getVida(),chefeFinal.getStrength());
 				if (v==1)
 			    mapa[x+1][y-1]='Z';
 				else if (v==0){
@@ -275,7 +272,7 @@ void Mapa::verificarMapa(char d, int x, int y, int *l, int *c, int *c1){
 			    mapa[x][y]='1';
 			    *l=x+1;
 			}else if(mapa[x+1][y]=='H'){
-				v=hunterJogador->atacarHumano(chefe,chefeFinal.getVida(),chefeFinal.getStrength());
+				v=Jogador->atacarHumano(chefe,chefeFinal.getVida(),chefeFinal.getStrength());
 				if (v==1){
 				*c1=*c1+1;
                 humanosVivos--;
@@ -288,11 +285,11 @@ void Mapa::verificarMapa(char d, int x, int y, int *l, int *c, int *c1){
 			    exit(0);
                 }
 		    }else if((mapa[x+1][y]=='A') || (mapa[x+1][y]=='C')){
-				hunterJogador->pegarItem(mapa[x+1][y]);
+				Jogador->pegarItem(mapa[x+1][y]);
 				mapa[x+1][y]='1';
 			}else if (mapa[x+1][y]=='B'){
 				chefe=true;
-				v=hunterJogador->atacarHumano(chefe,chefeFinal.getVida(),chefeFinal.getStrength());
+				v=Jogador->atacarHumano(chefe,chefeFinal.getVida(),chefeFinal.getStrength());
 				if (v==1)
 			    mapa[x+1][y-1]='Z';
 				else if (v==0){
@@ -309,7 +306,7 @@ void Mapa::verificarMapa(char d, int x, int y, int *l, int *c, int *c1){
 			    *l=x+1;
 			    *c=y+1;
 			}else if(mapa[x+1][y+1]=='H'){
-				v=hunterJogador->atacarHumano(chefe,chefeFinal.getVida(),chefeFinal.getStrength());
+				v=Jogador->atacarHumano(chefe,chefeFinal.getVida(),chefeFinal.getStrength());
 				if (v==1){
 				*c1=*c1+1;
                 humanosVivos--;
@@ -322,11 +319,11 @@ void Mapa::verificarMapa(char d, int x, int y, int *l, int *c, int *c1){
 			    exit(0);
                 }
 		    }else if((mapa[x+1][y+1]=='A') || (mapa[x+1][y+1]=='C')){
-				hunterJogador->pegarItem(mapa[x+1][y+1]);
+				Jogador->pegarItem(mapa[x+1][y+1]);
 				mapa[x+1][y+1]='1';
 			}else if (mapa[x+1][y+1]=='B'){
 				chefe=true;
-				v=hunterJogador->atacarHumano(chefe,chefeFinal.getVida(),chefeFinal.getStrength());
+				v=Jogador->atacarHumano(chefe,chefeFinal.getVida(),chefeFinal.getStrength());
 				if (v==1)
 			    mapa[x+1][y-1]='Z';
 				else if (v==0){
@@ -344,7 +341,7 @@ void Mapa::verificarMapa(char d, int x, int y, int *l, int *c, int *c1){
 			    mapa[x][y]='1';
 			    *c=y-1;
 			}else if(mapa[x][y-1]=='H'){
-				v=hunterJogador->atacarHumano(chefe,chefeFinal.getVida(),chefeFinal.getStrength());
+				v=Jogador->atacarHumano(chefe,chefeFinal.getVida(),chefeFinal.getStrength());
 				if (v==1){
 				*c1=*c1+1;
                 humanosVivos--;
@@ -357,11 +354,11 @@ void Mapa::verificarMapa(char d, int x, int y, int *l, int *c, int *c1){
 			    exit(0);
                 }
 		    }else if((mapa[x][y-1]=='A') || (mapa[x][y-1]=='C')){
-				hunterJogador->pegarItem(mapa[x][y-1]);
+				Jogador->pegarItem(mapa[x][y-1]);
 				mapa[x][y-1]='1';
 			}else if (mapa[x][y-1]=='B'){
 				chefe=true;
-				v=hunterJogador->atacarHumano(chefe,chefeFinal.getVida(),chefeFinal.getStrength());
+				v=Jogador->atacarHumano(chefe,chefeFinal.getVida(),chefeFinal.getStrength());
 				if (v==1)
 			    mapa[x+1][y-1]='Z';
 				else if (v==0){
@@ -379,7 +376,7 @@ void Mapa::verificarMapa(char d, int x, int y, int *l, int *c, int *c1){
 			    mapa[x][y]='1';
 			    *c=y+1;
 			}else if(mapa[x][y+1]=='H'){
-				v=hunterJogador->atacarHumano(chefe,chefeFinal.getVida(),chefeFinal.getStrength());
+				v=Jogador->atacarHumano(chefe,chefeFinal.getVida(),chefeFinal.getStrength());
 				if (v==1){
 				*c1=*c1+1;
                 humanosVivos--;
@@ -392,11 +389,11 @@ void Mapa::verificarMapa(char d, int x, int y, int *l, int *c, int *c1){
 			    exit(0);
                 }
 		    }else if((mapa[x][y+1]=='A') || (mapa[x][y+1]=='C')){
-				hunterJogador->pegarItem(mapa[x][y+1]);
+				Jogador->pegarItem(mapa[x][y+1]);
 				mapa[x][y+1]='1';
 			}else if (mapa[x][y+1]=='B'){
 				chefe=true;
-				v=hunterJogador->atacarHumano(chefe,chefeFinal.getVida(),chefeFinal.getStrength());
+				v=Jogador->atacarHumano(chefe,chefeFinal.getVida(),chefeFinal.getStrength());
 				if (v==1)
 			    mapa[x+1][y-1]='Z';
 				else if (v==0){
@@ -413,7 +410,7 @@ void Mapa::verificarMapa(char d, int x, int y, int *l, int *c, int *c1){
 			    *l=x-1;
 			    *c=y-1;
 			}else if(mapa[x-1][y-1]=='H'){
-				v=hunterJogador->atacarHumano(chefe,chefeFinal.getVida(),chefeFinal.getStrength());
+				v=Jogador->atacarHumano(chefe,chefeFinal.getVida(),chefeFinal.getStrength());
 				if (v==1){
 				*c1=*c1+1;
                 humanosVivos--;
@@ -426,11 +423,11 @@ void Mapa::verificarMapa(char d, int x, int y, int *l, int *c, int *c1){
 			    exit(0);
                 }
 		    }else if((mapa[x-1][y-1]=='A') || (mapa[x-1][y-1]=='C')){
-				hunterJogador->pegarItem(mapa[x-1][y-1]);
+				Jogador->pegarItem(mapa[x-1][y-1]);
 				mapa[x-1][y-1]='1';
 			}else if (mapa[x-1][y-1]=='B'){
 				chefe=true;
-				v=hunterJogador->atacarHumano(chefe,chefeFinal.getVida(),chefeFinal.getStrength());
+				v=Jogador->atacarHumano(chefe,chefeFinal.getVida(),chefeFinal.getStrength());
 				if (v==1)
 			    mapa[x+1][y-1]='Z';
 				else if (v==0){
@@ -448,7 +445,7 @@ void Mapa::verificarMapa(char d, int x, int y, int *l, int *c, int *c1){
 			    mapa[x][y]='1';
 			    *l=x-1;
 			}else if(mapa[x-1][y]=='H'){
-				v=hunterJogador->atacarHumano(chefe,chefeFinal.getVida(),chefeFinal.getStrength());
+				v=Jogador->atacarHumano(chefe,chefeFinal.getVida(),chefeFinal.getStrength());
 				if (v==1){
 				*c1=*c1+1;
                 humanosVivos--;
@@ -461,11 +458,11 @@ void Mapa::verificarMapa(char d, int x, int y, int *l, int *c, int *c1){
 			    exit(0);
                 }
 		    }else if((mapa[x-1][y]=='A') || (mapa[x-1][y]=='C')){
-				hunterJogador->pegarItem(mapa[x-1][y]);
+				Jogador->pegarItem(mapa[x-1][y]);
                 mapa[x-1][y]='1';
 			}else if (mapa[x-1][y]=='B'){
 				chefe=true;
-				v=hunterJogador->atacarHumano(chefe,chefeFinal.getVida(),chefeFinal.getStrength());
+				v=Jogador->atacarHumano(chefe,chefeFinal.getVida(),chefeFinal.getStrength());
 				if (v==1)
 			    mapa[x+1][y-1]='Z';
 				else if (v==0){
@@ -482,7 +479,7 @@ void Mapa::verificarMapa(char d, int x, int y, int *l, int *c, int *c1){
 			    *l=x-1;
 			    *c=x+1;
 			}else if(mapa[x-1][y+1]=='H'){
-				v=hunterJogador->atacarHumano(chefe,chefeFinal.getVida(),chefeFinal.getStrength());
+				v=Jogador->atacarHumano(chefe,chefeFinal.getVida(),chefeFinal.getStrength());
 				if (v==1){
 				*c1=*c1+1;
                 humanosVivos--;
@@ -495,11 +492,11 @@ void Mapa::verificarMapa(char d, int x, int y, int *l, int *c, int *c1){
 			    exit(0);
 			    }
 		    }else if((mapa[x-1][y+1]=='A') || (mapa[x-1][y+1]=='C')){
-				hunterJogador->pegarItem(mapa[x-1][y+1]);
+				Jogador->pegarItem(mapa[x-1][y+1]);
 				mapa[x-1][y+1]='1';
 			}else if (mapa[x-1][y+1]=='B'){
 				chefe=true;
-				v=hunterJogador->atacarHumano(chefe,chefeFinal.getVida(),chefeFinal.getStrength());
+				v=Jogador->atacarHumano(chefe,chefeFinal.getVida(),chefeFinal.getStrength());
 				if (v==1)
 			    mapa[x+1][y-1]='Z';
 				else if (v==0){

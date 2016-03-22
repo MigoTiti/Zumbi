@@ -1,11 +1,5 @@
 #include "Zumbi.h"
 #include <random>
-#include <string>
-#include <ctime>
-#include <iostream>
-#include <conio.h>
-
-#define vh 4
 
 Zumbi::Zumbi():Humano(5000,300){
 	this->nome="Sem nome";

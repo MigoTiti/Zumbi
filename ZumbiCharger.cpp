@@ -1,8 +1,6 @@
 #include "ZumbiCharger.h"
 #include <random>
-#include <string>
 #include <ctime>
-#include <iostream>
 #include <conio.h>
 
 #define vh 4000
