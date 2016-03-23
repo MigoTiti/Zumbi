@@ -189,6 +189,7 @@ void Mapa::exibirMapa() const{
 void Mapa::andarMapa(char d, int *c){
 	int x, y, cfases=1;
 	    procurarMapa(&x,&y);
+	    ZumbiHunter* zAux = dynamic_cast<ZumbiHunter*>(Jogador);
 	    
 	    do{
 	        system("cls");
@@ -199,6 +200,15 @@ void Mapa::andarMapa(char d, int *c){
 		    	avancarDia();
 		    	cfases++;
 	    		iniciarMapa2();
+	    		if(zAux!=0){
+	    		    this->Jogador->incrementarVida(500);
+	    		    system("cls");
+	    		    cout << "Hunter possui vantagem a noite, +500 de vida."
+	    		    do{
+				        cin.get();
+			        }while(cin.get()!='\n');
+	    		}
+	    		
 	    		procurarMapa(&x,&y);	
 	    		d=getche();
 		    }else if ((*c==(humanos*2)) && (cfases==2)){

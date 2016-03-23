@@ -4,6 +4,7 @@
 #include <thread>
 #include "Zumbi.h"
 #include "ZumbiHunter.h"
+#include "ZumbiCharger.h"
 #include "Data.h"
 #include "Chefe.h"
 
